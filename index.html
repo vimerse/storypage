@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vimerse Story - Expanded Parameters</title>
+    <title>Vimerse Story - Generated Script State</title>
     <style>
         /* Same base styles as before */
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -149,13 +149,14 @@
             display: none;
         }
         
-        /* Story Parameters */
+        /* Story Parameters - NOW VISIBLE */
         .story-params {
             background: #252545;
             border: 1px solid #3A3B5A;
             border-radius: 8px;
             padding: 12px;
             margin-top: 16px;
+            display: block;
         }
         
         .params-header {
@@ -180,25 +181,158 @@
             padding: 20px;
         }
         
-        .placeholder {
+        /* SCRIPT RESULTS - Main feature of this state */
+        .storyboard-results {
             background: #252545;
-            border: 2px dashed #3A3B5A;
             border-radius: 12px;
-            padding: 40px 20px;
-            text-align: center;
+            border: 1px solid #3A3B5A;
             margin-bottom: 24px;
-            min-height: 300px;
+            overflow: hidden;
+        }
+        
+        .storyboard-header {
+            background: #1A1B3A;
+            padding: 16px 20px;
+            border-bottom: 1px solid #3A3B5A;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
         }
         
-        .placeholder-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.6; }
-        .placeholder-text { font-size: 16px; color: #9CA3AF; margin-bottom: 8px; }
-        .placeholder-subtext { font-size: 13px; color: #6B7280; opacity: 0.8; }
+        .storyboard-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #E5E7EB;
+        }
         
-        /* Parameters Section - EXPANDED STATE */
+        .storyboard-stats {
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+            color: #6B7280;
+        }
+        
+        .storyboard-content {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .script-segment {
+            padding: 16px 20px;
+            border-bottom: 1px solid #3A3B5A;
+            transition: background-color 0.2s;
+            position: relative;
+        }
+        
+        .script-segment:hover {
+            background-color: #1A1B3A;
+        }
+        
+        .script-segment.selected {
+            background-color: #2A2B4A;
+            border-left: 4px solid #FF6B00;
+        }
+        
+        .script-segment:last-child {
+            border-bottom: none;
+        }
+        
+        .segment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+            gap: 12px;
+        }
+        
+        .segment-number {
+            background: #FF6B00;
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 4px;
+            min-width: 20px;
+            text-align: center;
+        }
+        
+        .segment-meta {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        
+        .character-tag {
+            background: #3B82F6;
+            color: white;
+            font-size: 10px;
+            font-weight: 500;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+        
+        .duration-tag {
+            background: #0F0F23;
+            color: #6B7280;
+            font-size: 10px;
+            font-weight: 500;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        
+        .segment-text {
+            color: #E5E7EB;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 8px;
+            min-height: 20px;
+            outline: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            padding: 4px;
+        }
+        
+        .segment-actions {
+            display: flex;
+            gap: 8px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        
+        .script-segment:hover .segment-actions {
+            opacity: 1;
+        }
+        
+        .play-segment-btn {
+            background: #FF6B00;
+            border: none;
+            color: white;
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .play-segment-btn.playing {
+            background: #F59E0B;
+            color: #000;
+        }
+        
+        /* Keyboard help */
+        .keyboard-help {
+            font-size: 11px;
+            color: #6B7280;
+            text-align: center;
+            margin-top: 8px;
+            opacity: 0.8;
+        }
+        
+        /* Parameters Section - COLLAPSED after generation */
         .params-section {
             border-bottom: 1px solid #3A3B5A;
             margin-bottom: 16px;
@@ -215,7 +349,6 @@
         .section-title { font-size: 16px; font-weight: 600; }
         .section-summary { font-size: 13px; color: #6B7280; }
         
-        /* EXPANDED STATE: Arrow rotated */
         .expand-arrow { 
             width: 24px; height: 24px;
             background: #252545;
@@ -224,100 +357,6 @@
             align-items: center;
             justify-content: center;
             color: #9CA3AF;
-            transform: rotate(90deg);
-        }
-        
-        /* EXPANDED STATE: Form is visible with animation */
-        .parameters-content {
-            max-height: 1000px;
-            opacity: 1;
-            margin-bottom: 16px;
-            overflow: visible;
-        }
-        
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            margin: 16px 0;
-        }
-        
-        .form-group { display: flex; flex-direction: column; }
-        .form-group.full { grid-column: 1 / -1; }
-        
-        .form-label {
-            font-size: 13px;
-            font-weight: 500;
-            color: #9CA3AF;
-            margin-bottom: 6px;
-        }
-        
-        .form-input, .form-textarea, .form-select {
-            padding: 8px 12px;
-            border: 1px solid #3A3B5A;
-            border-radius: 6px;
-            font-size: 13px;
-            background: #252545;
-            color: #E5E7EB;
-        }
-        
-        .form-textarea { min-height: 60px; font-family: inherit; }
-        .form-helper { font-size: 11px; color: #6B7280; margin-top: 2px; }
-        
-        /* Voice Section */
-        .voice-section {
-            background: #252545;
-            border: 1px solid #3A3B5A;
-            border-radius: 8px;
-            padding: 16px;
-            margin: 16px 0;
-        }
-        
-        .voice-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-        
-        .voice-title { font-size: 14px; font-weight: 600; }
-        
-        .smart-btn {
-            background: linear-gradient(135deg, #FF6B00, #FF8533);
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 500;
-            cursor: pointer;
-        }
-        
-        .voice-input-group { display: flex; gap: 10px; }
-        .voice-input { flex: 1; }
-        .voice-actions { display: flex; gap: 8px; }
-        
-        .action-btn {
-            padding: 6px 12px;
-            background: transparent;
-            border: 1px solid #FF6B00;
-            border-radius: 4px;
-            color: #FF6B00;
-            font-size: 11px;
-            font-weight: 500;
-            cursor: pointer;
-        }
-        
-        .generate-btn {
-            width: 100%;
-            padding: 12px 20px;
-            background: linear-gradient(135deg, #FF6B00, #FF8533);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
         }
         
         /* Chat Section */
@@ -528,7 +567,7 @@
                     <div class="character-role">Security expert</div>
                 </div>
 
-                <!-- Story Parameters -->
+                <!-- Story Parameters - NOW VISIBLE -->
                 <div class="story-params">
                     <div class="params-header">📋 Story Settings</div>
                     <div class="param-item">
@@ -547,75 +586,128 @@
                         <span class="param-label">Duration: </span>
                         <span class="param-value">3 minutes</span>
                     </div>
+                    <div class="param-item">
+                        <span class="param-label">Narrator: </span>
+                        <span class="param-value">Professional Narrator</span>
+                    </div>
                 </div>
             </aside>
 
             <!-- Main Content -->
             <section class="main-content">
-                <!-- Storyboard Placeholder -->
-                <div class="placeholder">
-                    <div class="placeholder-icon">🎬</div>
-                    <div class="placeholder-text">Storyboard Preview</div>
-                    <div class="placeholder-subtext">Generate script to see voiced segments with timing</div>
+                <!-- SCRIPT RESULTS - Main feature -->
+                <div class="storyboard-results">
+                    <div class="storyboard-header">
+                        <h3 class="storyboard-title">📋 Script Segments</h3>
+                        <div class="storyboard-stats">
+                            <span>Duration: <strong>2:34</strong></span>
+                            <span>Segments: <strong>5</strong></span>
+                        </div>
+                    </div>
+                    <div class="storyboard-content">
+                        <!-- Script Segment 1 -->
+                        <div class="script-segment selected">
+                            <div class="segment-header">
+                                <div class="segment-number">1</div>
+                                <div class="segment-meta">
+                                    <div class="character-tag">Narrator</div>
+                                    <div class="duration-tag">00:08</div>
+                                </div>
+                            </div>
+                            <div class="segment-text">Deep in the Amazon rainforest, Dr. Emma Sterling pushes through the dense undergrowth, her eyes fixed on the ancient stone structures ahead.</div>
+                            <div class="segment-actions">
+                                <button class="play-segment-btn playing">
+                                    <span>⏸️</span>
+                                    Playing
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Script Segment 2 -->
+                        <div class="script-segment">
+                            <div class="segment-header">
+                                <div class="segment-number">2</div>
+                                <div class="segment-meta">
+                                    <div class="character-tag">Narrator</div>
+                                    <div class="duration-tag">00:07</div>
+                                </div>
+                            </div>
+                            <div class="segment-text">The ruins seem to pulse with an otherworldly energy, covered in symbols that don't match any known civilization.</div>
+                            <div class="segment-actions">
+                                <button class="play-segment-btn">
+                                    <span>▶️</span>
+                                    Play
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Script Segment 3 -->
+                        <div class="script-segment">
+                            <div class="segment-header">
+                                <div class="segment-number">3</div>
+                                <div class="segment-meta">
+                                    <div class="character-tag">Marcus Wright</div>
+                                    <div class="duration-tag">00:04</div>
+                                </div>
+                            </div>
+                            <div class="segment-text">"Emma, we need to be careful. These readings are off the charts."</div>
+                            <div class="segment-actions">
+                                <button class="play-segment-btn">
+                                    <span>▶️</span>
+                                    Play
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Script Segment 4 -->
+                        <div class="script-segment">
+                            <div class="segment-header">
+                                <div class="segment-number">4</div>
+                                <div class="segment-meta">
+                                    <div class="character-tag">Narrator</div>
+                                    <div class="duration-tag">00:06</div>
+                                </div>
+                            </div>
+                            <div class="segment-text">Marcus Wright, her trusted security expert, scans the area with his advanced equipment, concern etched on his weathered face.</div>
+                            <div class="segment-actions">
+                                <button class="play-segment-btn">
+                                    <span>▶️</span>
+                                    Play
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Script Segment 5 -->
+                        <div class="script-segment">
+                            <div class="segment-header">
+                                <div class="segment-number">5</div>
+                                <div class="segment-meta">
+                                    <div class="character-tag">Narrator</div>
+                                    <div class="duration-tag">00:09</div>
+                                </div>
+                            </div>
+                            <div class="segment-text">As Emma approaches the central structure, a brilliant light emanates from within, revealing technology that shouldn't exist on Earth.</div>
+                            <div class="segment-actions">
+                                <button class="play-segment-btn">
+                                    <span>▶️</span>
+                                    Play
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="keyboard-help">
+                        ⌨️ Enter: Split | Delete/Backspace: Merge | Ctrl+Z: Undo | Click: Select & Edit
+                    </div>
                 </div>
 
-                <!-- Parameters Section - EXPANDED STATE -->
+                <!-- Parameters Section - COLLAPSED after generation -->
                 <div class="params-section">
                     <div class="params-header-main">
                         <div>
                             <div class="section-title">Story Parameters</div>
-                            <div class="section-summary">Configure script generation settings</div>
+                            <div class="section-summary">Story generated successfully</div>
                         </div>
                         <div class="expand-arrow">▶</div>
-                    </div>
-
-                    <!-- Form (EXPANDED - visible) -->
-                    <div class="parameters-content">
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label class="form-label">Setting/Location</label>
-                                <input type="text" class="form-input" value="Ancient ruins in Amazon rainforest">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Theme/Main Idea</label>
-                                <input type="text" class="form-input" value="Discovering hidden alien technology">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Mood</label>
-                                <select class="form-select">
-                                    <option selected>Suspenseful</option>
-                                    <option>Adventurous</option>
-                                    <option>Mysterious</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Target Duration (minutes)</label>
-                                <input type="number" class="form-input" value="3">
-                                <div class="form-helper">≈ 450 words estimated</div>
-                            </div>
-                            <div class="form-group full">
-                                <label class="form-label">Additional Notes</label>
-                                <textarea class="form-textarea" placeholder="Any specific requirements..."></textarea>
-                            </div>
-                        </div>
-
-                        <!-- Voice Section -->
-                        <div class="voice-section">
-                            <div class="voice-header">
-                                <div class="voice-title">🎤 Narrator Voice</div>
-                                <button class="smart-btn">🎯 Smart Selection</button>
-                            </div>
-                            <div class="voice-input-group">
-                                <input type="text" class="form-input voice-input" placeholder="Voice ID (e.g., 21m00Tcm4TlvDq8ikWAM)">
-                                <div class="voice-actions">
-                                    <button class="action-btn">Validate</button>
-                                    <button class="action-btn">Test</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Generate Button -->
-                        <button class="generate-btn">🎬 Generate Story & Voiceover</button>
                     </div>
                 </div>
             </section>
@@ -635,12 +727,22 @@
                     </div>
                     <div class="chat-message user">
                         <div class="chat-avatar">👤</div>
-                        <div class="chat-bubble">How do I add more characters?</div>
+                        <div class="chat-bubble">Generate the story now</div>
                     </div>
                     <div class="chat-message assistant">
                         <div class="chat-avatar">🤖</div>
                         <div class="chat-bubble">
-                            Click the "+" button in the Script Characters section to add more characters. You can have up to 5 characters total.
+                            Story generated! 🎉 You now have 5 script segments totaling 2:34. Click any segment to edit the text, or use the play buttons to preview the voiceover. You can split segments with Enter or merge them with Delete.
+                        </div>
+                    </div>
+                    <div class="chat-message user">
+                        <div class="chat-avatar">👤</div>
+                        <div class="chat-bubble">How do I edit a segment?</div>
+                    </div>
+                    <div class="chat-message assistant">
+                        <div class="chat-avatar">🤖</div>
+                        <div class="chat-bubble">
+                            Click on any segment text to edit it directly. The segment will highlight in orange when selected. You can also use keyboard shortcuts: Enter to split at cursor position, Delete/Backspace to merge segments.
                         </div>
                     </div>
                 </div>
@@ -654,7 +756,7 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-status">Selected: Emma Sterling (protagonist), Marcus Wright</div>
+        <div class="footer-status">Story generated: 5 segments, 2:34 duration</div>
         <div class="footer-buttons">
             <button class="footer-btn secondary">← Back</button>
             <button class="footer-btn primary">Next →</button>

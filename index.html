@@ -3,85 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Story - Vimerse</title>
+    <title>Vimerse Story - Hover States</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            /* Dark Theme Colors */
-            --bg-primary: #0F0F23;
-            --bg-secondary: #1A1B3A;
-            --bg-tertiary: #252545;
-            --surface: #2A2B4A;
-            --border: #3A3B5A;
-            --border-light: #4A4B6A;
-            
-            /* Text Colors */
-            --text-primary: #E5E7EB;
-            --text-secondary: #9CA3AF;
-            --text-muted: #6B7280;
-            
-            /* Brand Colors */
-            --accent-orange: #FF6B00;
-            --accent-blue: #3B82F6;
-            --success: #10B981;
-            --error: #EF4444;
-            --warning: #F59E0B;
-        }
-
+        /* Same base styles as before */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            background: #0F0F23;
+            color: #E5E7EB;
             line-height: 1.5;
-            overflow-x: hidden;
         }
-
-        /* Compact Header */
+        
+        .container { max-width: 1400px; margin: 0 auto; }
+        
+        /* Header */
         .header {
-            background: var(--bg-secondary);
+            background: #1A1B3A;
             padding: 12px 24px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header-left {
+            border-bottom: 1px solid #3A3B5A;
             display: flex;
             align-items: center;
             gap: 24px;
         }
-
-        .page-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--text-primary);
+        
+        .page-title { font-size: 18px; font-weight: 600; }
+        .project-info { 
+            font-size: 13px; 
+            color: #6B7280; 
+            padding: 4px 12px; 
+            background: #252545; 
+            border-radius: 20px; 
         }
-
-        .project-info {
-            font-size: 13px;
-            color: var(--text-muted);
-            padding: 4px 12px;
-            background: var(--bg-tertiary);
-            border-radius: 20px;
-        }
-
-        /* Compact Workflow Steps */
-        .workflow-steps {
-            background: var(--bg-secondary);
+        
+        /* Workflow */
+        .workflow {
+            background: #1A1B3A;
             padding: 8px 24px;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid #3A3B5A;
             display: flex;
             gap: 16px;
-            align-items: center;
-            overflow-x: auto;
         }
-
+        
         .step {
             display: flex;
             align-items: center;
@@ -89,28 +52,14 @@
             font-size: 13px;
             padding: 4px 12px;
             border-radius: 20px;
-            white-space: nowrap;
-            transition: all 0.2s;
         }
-
-        .step.active {
-            background: var(--accent-orange);
-            color: white;
-        }
-
-        .step.inactive {
-            background: var(--bg-tertiary);
-            color: var(--text-muted);
-        }
-
-        .step.complete {
-            background: var(--success);
-            color: white;
-        }
-
+        
+        .step.complete { background: #10B981; color: white; }
+        .step.active { background: #FF6B00; color: white; }
+        .step.inactive { background: #252545; color: #6B7280; }
+        
         .step-number {
-            width: 16px;
-            height: 16px;
+            width: 16px; height: 16px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -119,213 +68,131 @@
             font-size: 10px;
             background: rgba(255, 255, 255, 0.2);
         }
-
-        /* Main Content */
-        .main-content {
-            padding: 20px 24px 120px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        /* 3-Column Layout Grid */
-        .content-grid {
+        
+        /* Main Grid */
+        .main-grid {
+            padding: 20px 24px;
             display: grid;
             grid-template-columns: 200px 1fr 320px;
             gap: 24px;
-            align-items: start;
-            min-height: calc(100vh - 200px);
+            min-height: 80vh;
         }
-
-        /* Character List Sidebar */
+        
+        /* Character Sidebar */
         .character-sidebar {
-            background: var(--surface);
+            background: #2A2B4A;
+            border: 1px solid #3A3B5A;
             border-radius: 12px;
-            border: 1px solid var(--border);
             padding: 16px;
             height: fit-content;
         }
-
-        .characters-header {
+        
+        .sidebar-header {
             font-size: 15px;
             font-weight: 600;
-            color: var(--text-primary);
             margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
-        .add-character-btn {
-            background: none;
+        
+        /* HOVER STATE: Add button is hovered */
+        .add-btn {
+            background: rgba(255, 107, 0, 0.1);
             border: none;
-            color: var(--accent-orange);
-            cursor: pointer;
+            color: #E55A00;
             font-size: 14px;
-            padding: 2px;
-            transition: all 0.2s;
-            width: 20px;
-            height: 20px;
+            cursor: pointer;
+            width: 20px; height: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 4px;
-        }
-
-        .add-character-btn:hover {
-            color: #E55A00;
-            background: rgba(255, 107, 0, 0.1);
             transform: scale(1.1);
         }
-
-        .character-item {
-            background: var(--bg-tertiary);
-            border: 2px solid var(--border);
+        
+        .character-card {
+            background: #252545;
+            border: 2px solid #FF6B00;
             border-radius: 8px;
             margin-bottom: 10px;
-            cursor: pointer;
-            transition: all 0.2s;
-            overflow: hidden;
+            padding: 12px;
+            text-align: center;
             position: relative;
         }
-
-        .character-item.selected {
-            border-color: var(--accent-orange);
-            box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.2);
+        
+        /* HOVER STATE: Character card hovered */
+        .character-card.hovered {
+            border-color: #FF6B00;
         }
-
-        .character-item:hover {
-            border-color: var(--accent-orange);
-        }
-
-        .character-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            padding: 12px;
-        }
-
-        .character-thumbnail {
-            width: 48px;
-            height: 48px;
+        
+        .character-avatar {
+            width: 48px; height: 48px;
             border-radius: 6px;
-            object-fit: cover;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-        }
-
-        .character-info {
-            text-align: center;
-            width: 100%;
-        }
-
-        .character-name {
-            font-size: 12px;
+            background: #1A1B3A;
+            border: 1px solid #3A3B5A;
+            margin: 0 auto 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 2px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            color: #E5E7EB;
         }
-
-        .character-role {
-            font-size: 10px;
-            color: var(--text-muted);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .protagonist-badge {
-            font-size: 9px;
-            color: var(--accent-orange);
-            font-weight: 600;
-            margin-top: 2px;
-        }
-
-        .remove-character-btn {
+        
+        .character-name { font-size: 12px; font-weight: 600; margin-bottom: 2px; }
+        .character-role { font-size: 10px; color: #6B7280; }
+        .protagonist-badge { font-size: 9px; color: #FF6B00; font-weight: 600; margin-top: 2px; }
+        
+        /* HOVER STATE: Remove button visible on hover */
+        .remove-btn {
             position: absolute;
-            top: 4px;
-            right: 4px;
-            background: var(--error);
+            top: 4px; right: 4px;
+            background: #EF4444;
             color: white;
             border: none;
             border-radius: 50%;
-            width: 16px;
-            height: 16px;
+            width: 16px; height: 16px;
             font-size: 10px;
             cursor: pointer;
-            display: none;
+            display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s;
         }
-
-        .character-item:hover .remove-character-btn {
-            display: flex;
-        }
-
-        .remove-character-btn:hover {
-            background: #dc2626;
-            transform: scale(1.1);
-        }
-
-        /* Story Parameters Sidebar (shown after generation) */
-        .story-parameters {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border);
+        
+        /* Story Parameters */
+        .story-params {
+            background: #252545;
+            border: 1px solid #3A3B5A;
             border-radius: 8px;
             padding: 12px;
             margin-top: 16px;
-            display: none;
         }
-
-        .story-parameters.show {
-            display: block;
-        }
-
-        .story-parameters-header {
+        
+        .params-header {
             font-size: 13px;
             font-weight: 600;
-            color: var(--text-primary);
             margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
         }
-
-        .parameter-item {
+        
+        .param-item {
             margin-bottom: 6px;
             font-size: 11px;
         }
-
-        .parameter-label {
-            color: var(--text-muted);
-            display: block;
-        }
-
-        .parameter-value {
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        /* Main Storyboard Card */
-        .main-storyboard-card {
-            background: var(--surface);
+        
+        .param-label { color: #6B7280; }
+        .param-value { color: #9CA3AF; font-weight: 500; }
+        
+        /* Main Content */
+        .main-content {
+            background: #2A2B4A;
+            border: 1px solid #3A3B5A;
             border-radius: 12px;
-            border: 1px solid var(--border);
             padding: 20px;
-            height: fit-content;
-            display: flex;
-            flex-direction: column;
-            min-height: 400px;
         }
-
-        /* Storyboard Placeholder */
-        .storyboard-placeholder {
-            background: var(--bg-tertiary);
-            border: 2px dashed var(--border);
+        
+        .placeholder {
+            background: #252545;
+            border: 2px dashed #3A3B5A;
             border-radius: 12px;
             padding: 40px 20px;
             text-align: center;
@@ -336,325 +203,93 @@
             justify-content: center;
             align-items: center;
         }
-
-        .placeholder-icon {
-            font-size: 48px;
+        
+        .placeholder-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.6; }
+        .placeholder-text { font-size: 16px; color: #9CA3AF; margin-bottom: 8px; }
+        .placeholder-subtext { font-size: 13px; color: #6B7280; opacity: 0.8; }
+        
+        /* Parameters Section */
+        .params-section {
+            border-bottom: 1px solid #3A3B5A;
             margin-bottom: 16px;
-            opacity: 0.6;
+            padding-bottom: 12px;
         }
-
-        .placeholder-text {
-            font-size: 16px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-        }
-
-        .placeholder-subtext {
-            font-size: 13px;
-            color: var(--text-muted);
-            opacity: 0.8;
-        }
-
-        /* Storyboard Results */
-        .storyboard-results {
-            background: var(--bg-tertiary);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            margin-bottom: 24px;
-            overflow: hidden;
-        }
-
-        .storyboard-header {
-            background: var(--bg-secondary);
-            padding: 16px 20px;
-            border-bottom: 1px solid var(--border);
+        
+        /* HOVER STATE: Parameters header hovered */
+        .params-header-main {
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .storyboard-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .storyboard-stats {
-            display: flex;
-            gap: 16px;
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
-        .storyboard-content {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .script-segment {
-            padding: 16px 20px;
-            border-bottom: 1px solid var(--border);
-            transition: background-color 0.2s;
-            position: relative;
-        }
-
-        .script-segment:hover {
-            background-color: var(--bg-secondary);
-        }
-
-        .script-segment.selected {
-            background-color: var(--surface);
-            border-left: 4px solid var(--accent-orange);
-        }
-
-        .script-segment:last-child {
-            border-bottom: none;
-        }
-
-        .segment-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 8px;
-            gap: 12px;
-        }
-
-        .segment-number {
-            background: var(--accent-orange);
-            color: white;
-            font-size: 10px;
-            font-weight: 600;
-            padding: 2px 6px;
-            border-radius: 4px;
-            min-width: 20px;
-            text-align: center;
-        }
-
-        .segment-meta {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            margin-left: auto;
-        }
-
-        .character-tag {
-            background: var(--accent-blue);
-            color: white;
-            font-size: 10px;
-            font-weight: 500;
-            padding: 2px 8px;
-            border-radius: 12px;
-        }
-
-        .duration-tag {
-            background: var(--bg-primary);
-            color: var(--text-muted);
-            font-size: 10px;
-            font-weight: 500;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: monospace;
-        }
-
-        .segment-text {
-            color: var(--text-primary);
-            font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 8px;
-            min-height: 20px;
-            outline: none;
-            border: 1px solid transparent;
-            border-radius: 4px;
-            padding: 4px;
-            transition: all 0.2s;
-        }
-
-        .segment-text:focus {
-            border-color: var(--accent-orange);
-            background-color: var(--bg-secondary);
-        }
-
-        .segment-actions {
-            display: flex;
-            gap: 8px;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-
-        .script-segment:hover .segment-actions {
-            opacity: 1;
-        }
-
-        .play-segment-btn {
-            background: var(--accent-orange);
-            border: none;
-            color: white;
-            font-size: 11px;
-            padding: 4px 8px;
-            border-radius: 4px;
             cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            color: #FF6B00;
         }
-
-        .play-segment-btn:hover {
-            background: #E55A00;
-        }
-
-        .play-segment-btn.playing {
-            background: var(--warning);
-            color: #000;
-        }
-
-        /* Parameters Section - Collapsible */
-        .parameters-section {
-            margin-bottom: 20px;
-        }
-
-        .parameters-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            cursor: pointer;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 16px;
-            transition: all 0.2s;
-        }
-
-        .parameters-header:hover {
-            color: var(--accent-orange);
-        }
-
-        .parameters-title {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .section-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .parameters-summary {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        .expand-arrow {
-            width: 24px;
-            height: 24px;
-            transition: transform 0.2s;
-            color: var(--text-secondary);
-            stroke-width: 2.5;
-            background: var(--bg-tertiary);
-            border-radius: 4px;
-            padding: 2px;
-        }
-
-        .expand-arrow.expanded {
-            transform: rotate(90deg);
-        }
-
-        .parameters-header:hover .expand-arrow {
-            color: var(--accent-orange);
+        
+        .section-title { font-size: 16px; font-weight: 600; }
+        .section-summary { font-size: 13px; color: #6B7280; }
+        
+        /* HOVER STATE: Expand arrow hovered */
+        .expand-arrow { 
+            width: 24px; height: 24px;
             background: rgba(255, 107, 0, 0.1);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FF6B00;
         }
-
-        .parameters-content {
-            overflow: hidden;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .parameters-content.collapsed {
-            max-height: 0;
-            opacity: 0;
-            margin-bottom: 0;
-        }
-
-        .parameters-content.expanded {
-            max-height: 1000px;
-            opacity: 1;
-            margin-bottom: 16px;
-        }
-
+        
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 14px;
-            margin-bottom: 16px;
+            margin: 16px 0;
         }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group.full-width {
-            grid-column: 1 / -1;
-        }
-
+        
+        .form-group { display: flex; flex-direction: column; }
+        .form-group.full { grid-column: 1 / -1; }
+        
         .form-label {
             font-size: 13px;
             font-weight: 500;
-            color: var(--text-secondary);
+            color: #9CA3AF;
             margin-bottom: 6px;
         }
-
+        
+        /* HOVER/FOCUS STATE: Form inputs focused */
         .form-input, .form-textarea, .form-select {
             padding: 8px 12px;
-            border: 1px solid var(--border);
+            border: 1px solid #FF6B00;
             border-radius: 6px;
             font-size: 13px;
-            background: var(--bg-tertiary);
-            transition: all 0.2s;
-            color: var(--text-primary);
-        }
-
-        .form-input:focus, .form-textarea:focus, .form-select:focus {
-            outline: none;
-            border-color: var(--accent-orange);
+            background: #1A1B3A;
+            color: #E5E7EB;
             box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.2);
-            background: var(--bg-secondary);
         }
-
-        .form-textarea {
-            min-height: 60px;
-            resize: vertical;
-            font-family: inherit;
-        }
-
+        
+        .form-textarea { min-height: 60px; font-family: inherit; }
+        .form-helper { font-size: 11px; color: #6B7280; margin-top: 2px; }
+        
         /* Voice Section */
         .voice-section {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border);
+            background: #252545;
+            border: 1px solid #3A3B5A;
             border-radius: 8px;
             padding: 16px;
-            margin-top: 16px;
+            margin: 16px 0;
         }
-
+        
         .voice-header {
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
             margin-bottom: 12px;
         }
-
-        .voice-title {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .smart-selection-btn {
-            background: linear-gradient(135deg, var(--accent-orange), #FF8533);
+        
+        .voice-title { font-size: 14px; font-weight: 600; }
+        
+        /* HOVER STATE: Smart selection button hovered */
+        .smart-btn {
+            background: linear-gradient(135deg, #FF6B00, #FF8533);
             color: white;
             border: none;
             padding: 6px 12px;
@@ -662,235 +297,84 @@
             font-size: 11px;
             font-weight: 500;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            transition: all 0.2s;
-        }
-
-        .smart-selection-btn:hover {
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(255, 107, 0, 0.4);
         }
-
-        .voice-input-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .voice-input {
-            flex: 1;
-        }
-
-        .voice-actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        .validate-btn, .test-voice-btn {
+        
+        .voice-input-group { display: flex; gap: 10px; }
+        .voice-input { flex: 1; }
+        .voice-actions { display: flex; gap: 8px; }
+        
+        /* HOVER STATE: Action buttons hovered */
+        .action-btn {
             padding: 6px 12px;
-            background: transparent;
-            border: 1px solid var(--accent-orange);
+            background: #FF6B00;
+            border: 1px solid #FF6B00;
             border-radius: 4px;
-            color: var(--accent-orange);
+            color: white;
             font-size: 11px;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s;
-            white-space: nowrap;
         }
-
-        .validate-btn:hover, .test-voice-btn:hover {
-            background: var(--accent-orange);
-            color: white;
-        }
-
-        .validate-btn.validated {
-            background: var(--success);
-            border-color: var(--success);
-            color: white;
-        }
-
-        /* Selected Voice Display */
-        .selected-voice {
-            background: var(--bg-secondary);
-            border: 1px solid var(--success);
-            border-radius: 8px;
-            padding: 16px;
-            margin-top: 12px;
-        }
-
-        .selected-voice-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .selected-voice-info {
-            flex: 1;
-        }
-
-        .selected-voice-name {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-        }
-
-        .selected-voice-id {
-            font-family: 'Monaco', 'Menlo', monospace;
-            font-size: 12px;
-            color: var(--text-muted);
-            background: var(--bg-tertiary);
-            padding: 4px 8px;
-            border-radius: 4px;
-            display: inline-block;
-        }
-
-        .selected-voice-description {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.4;
-            margin-bottom: 16px;
-        }
-
-        .selected-voice-controls {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-
-        .play-voice-btn {
-            background: var(--accent-orange);
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 500;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s;
-            flex: 1;
-            justify-content: center;
-        }
-
-        .play-voice-btn:hover {
-            background: #E55A00;
-        }
-
-        .change-voice-btn {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border);
-            color: var(--text-primary);
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-            flex: 1;
-            justify-content: center;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .change-voice-btn:hover {
-            background: var(--surface);
-            border-color: var(--accent-orange);
-            color: var(--accent-orange);
-        }
-
-        /* Generate Button */
-        .generate-section {
-            text-align: center;
-        }
-
+        
+        /* HOVER STATE: Generate button hovered */
         .generate-btn {
             width: 100%;
             padding: 12px 20px;
-            background: linear-gradient(135deg, var(--accent-orange), #FF8533);
+            background: linear-gradient(135deg, #FF6B00, #FF8533);
             color: white;
             border: none;
             border-radius: 8px;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .generate-btn:hover {
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(255, 107, 0, 0.4);
         }
-
-        .generate-btn:disabled {
-            background: var(--bg-tertiary);
-            color: var(--text-muted);
-            cursor: not-allowed;
-            transform: none;
-        }
-
+        
         /* Chat Section */
         .chat-section {
-            background: var(--surface);
+            background: #2A2B4A;
+            border: 1px solid #3A3B5A;
             border-radius: 12px;
-            border: 1px solid var(--border);
             overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             height: fit-content;
-            max-height: calc(100vh - 180px);
+            max-height: 600px;
             display: flex;
             flex-direction: column;
         }
-
+        
         .chat-header {
-            background: linear-gradient(135deg, var(--accent-orange), #FF8533);
+            background: linear-gradient(135deg, #FF6B00, #FF8533);
             color: white;
             padding: 12px 16px;
             display: flex;
             align-items: center;
             gap: 10px;
-            flex-shrink: 0;
         }
-
-        .chat-header h3 {
-            font-size: 14px;
-            font-weight: 600;
-        }
-
+        
+        .chat-title { font-size: 14px; font-weight: 600; }
+        
         .chat-messages {
             flex: 1;
-            overflow-y: auto;
             padding: 16px;
-            background: var(--bg-tertiary);
+            background: #252545;
             min-height: 300px;
-            max-height: 500px;
+            max-height: 400px;
+            overflow-y: auto;
         }
-
+        
         .chat-message {
             display: flex;
             gap: 8px;
             margin-bottom: 12px;
             align-items: flex-start;
         }
-
-        .chat-message.user {
-            flex-direction: row-reverse;
-        }
-
+        
+        .chat-message.user { flex-direction: row-reverse; }
+        
         .chat-avatar {
-            width: 24px;
-            height: 24px;
+            width: 24px; height: 24px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -898,68 +382,58 @@
             font-size: 10px;
             flex-shrink: 0;
         }
-
+        
         .chat-message.assistant .chat-avatar {
-            background: linear-gradient(135deg, var(--accent-orange), #FF8533);
+            background: linear-gradient(135deg, #FF6B00, #FF8533);
             color: white;
         }
-
+        
         .chat-message.user .chat-avatar {
-            background: var(--bg-secondary);
-            color: var(--text-secondary);
+            background: #1A1B3A;
+            color: #9CA3AF;
         }
-
+        
         .chat-bubble {
-            background: var(--surface);
-            border: 1px solid var(--border);
+            background: #2A2B4A;
+            border: 1px solid #3A3B5A;
             border-radius: 10px;
             padding: 8px 10px;
             max-width: 85%;
             font-size: 12px;
             line-height: 1.4;
         }
-
+        
         .chat-message.user .chat-bubble {
-            background: var(--bg-secondary);
-            border-color: var(--border-light);
+            background: #1A1B3A;
+            border-color: #4A4B6A;
         }
-
-        .chat-input-container {
+        
+        .chat-input-area {
             padding: 12px 16px;
-            border-top: 1px solid var(--border);
-            background: var(--bg-secondary);
-            flex-shrink: 0;
-        }
-
-        .chat-input-wrapper {
+            border-top: 1px solid #3A3B5A;
+            background: #1A1B3A;
             display: flex;
             gap: 8px;
             align-items: flex-end;
         }
-
+        
+        /* FOCUS STATE: Chat input focused */
         .chat-input {
             flex: 1;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border);
+            background: #252545;
+            border: 1px solid #FF6B00;
             border-radius: 16px;
             padding: 6px 12px;
             font-size: 12px;
-            resize: none;
-            max-height: 60px;
+            color: #E5E7EB;
             min-height: 28px;
-            color: var(--text-primary);
-        }
-
-        .chat-input:focus {
-            outline: none;
-            border-color: var(--accent-orange);
             box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.2);
         }
-
-        .chat-send-btn {
-            width: 28px;
-            height: 28px;
-            background: linear-gradient(135deg, var(--accent-orange), #FF8533);
+        
+        /* HOVER STATE: Send button hovered */
+        .chat-send {
+            width: 28px; height: 28px;
+            background: linear-gradient(135deg, #FF6B00, #FF8533);
             border: none;
             border-radius: 50%;
             color: white;
@@ -967,19 +441,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s;
-            flex-shrink: 0;
-        }
-
-        .chat-send-btn:hover {
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(255, 107, 0, 0.4);
         }
-
+        
         /* Footer */
         .footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border);
+            background: #1A1B3A;
+            border-top: 1px solid #3A3B5A;
             padding: 12px 24px;
             display: flex;
             justify-content: space-between;
@@ -989,1583 +458,228 @@
             left: 0;
             right: 0;
         }
-
-        .footer-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn {
+        
+        .footer-status { font-size: 11px; color: #6B7280; }
+        .footer-buttons { display: flex; gap: 10px; }
+        
+        .footer-btn {
             padding: 8px 16px;
             border-radius: 6px;
             font-size: 13px;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s;
             border: none;
         }
-
-        .btn-secondary {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text-secondary);
+        
+        /* HOVER STATE: Secondary button hovered */
+        .footer-btn.secondary {
+            background: #252545;
+            border: 1px solid #3A3B5A;
+            color: #9CA3AF;
         }
-
-        .btn-secondary:hover {
-            background: var(--bg-tertiary);
-        }
-
-        .btn-primary {
-            background: var(--accent-orange);
-            color: white;
-        }
-
-        .btn-primary:hover {
+        
+        /* HOVER STATE: Primary button hovered */
+        .footer-btn.primary {
             background: #E55A00;
+            color: white;
         }
-
-        .btn:disabled {
+        
+        .footer-btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
         }
-
-        /* Smart Selection Modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            padding: 20px;
-        }
-
-        .modal-overlay.show {
-            display: flex;
-        }
-
-        .modal-content {
-            background: var(--surface);
-            border-radius: 16px;
-            border: 1px solid var(--border);
-            max-width: 600px;
-            width: 100%;
-            max-height: 80vh;
-            overflow-y: auto;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        .modal-header {
-            padding: 20px 24px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: linear-gradient(135deg, var(--accent-orange), #FF8533);
-            color: white;
-            border-radius: 16px 16px 0 0;
-        }
-
-        .modal-title {
-            font-size: 18px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .modal-close {
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-size: 24px;
-            padding: 4px;
-            border-radius: 4px;
-            transition: all 0.2s;
-            opacity: 0.8;
-        }
-
-        .modal-close:hover {
-            opacity: 1;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .modal-body {
-            padding: 24px;
-        }
-
-        .modal-footer {
-            padding: 20px 24px;
-            border-top: 1px solid var(--border);
-            display: flex;
-            gap: 12px;
-            justify-content: flex-end;
-            background: var(--bg-secondary);
-            border-radius: 0 0 16px 16px;
-        }
-
-        .voice-candidates {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            min-height: 150px;
-        }
-
-        .loading-state {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
-            color: var(--text-secondary);
-        }
-
-        .status-spinner {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--border);
-            border-top: 2px solid var(--accent-orange);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .loading-text {
-            margin-top: 12px;
-            font-size: 14px;
-        }
-
-        .voice-candidate {
-            background: var(--bg-tertiary);
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            padding: 16px;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .voice-candidate:hover {
-            border-color: var(--accent-orange);
-            background: var(--surface);
-        }
-
-        .voice-candidate.selected {
-            border-color: var(--accent-orange);
-            box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.3);
-            background: var(--surface);
-        }
-
-        .voice-info {
-            flex: 1;
-        }
-
-        .voice-name {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-        }
-
-        .voice-description {
-            color: var(--text-secondary);
-            font-size: 13px;
-            line-height: 1.4;
-        }
-
-        .voice-controls {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .preview-btn {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            color: var(--text-primary);
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s;
-            min-width: 80px;
-            justify-content: center;
-        }
-
-        .preview-btn:hover {
-            background: var(--border);
-        }
-
-        .preview-btn.playing {
-            background: var(--accent-orange);
-            color: white;
-            border-color: var(--accent-orange);
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        /* Character Selection Modal */
-        .character-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 16px;
-            min-height: 200px;
-        }
-
-        .available-character {
-            background: var(--bg-tertiary);
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            padding: 16px;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-align: center;
-            position: relative;
-        }
-
-        .available-character:hover {
-            border-color: var(--accent-orange);
-            background: var(--surface);
-            transform: translateY(-2px);
-        }
-
-        .available-character.selected {
-            border-color: var(--accent-orange);
-            box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.3);
-            background: var(--surface);
-        }
-
-        .available-character.already-added {
-            opacity: 0.5;
-            cursor: not-allowed;
-            border-color: var(--text-muted);
-        }
-
-        .available-character.already-added:hover {
-            transform: none;
-            border-color: var(--text-muted);
-            background: var(--bg-tertiary);
-        }
-
-        .available-character-thumbnail {
-            width: 64px;
-            height: 64px;
-            border-radius: 8px;
-            object-fit: cover;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            margin: 0 auto 12px;
-            display: block;
-        }
-
-        .available-character-name {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-        }
-
-        .available-character-role {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-        }
-
-        .character-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-            justify-content: center;
-            margin-bottom: 8px;
-        }
-
-        .character-tag-small {
-            background: var(--accent-blue);
-            color: white;
-            font-size: 9px;
-            font-weight: 500;
-            padding: 2px 6px;
-            border-radius: 8px;
-        }
-
-        .character-tag-small.protagonist {
-            background: var(--accent-orange);
-        }
-
-        .character-tag-small.antagonist {
-            background: var(--error);
-        }
-
-        .character-tag-small.supporting {
-            background: var(--accent-blue);
-        }
-
-        .already-added-badge {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: var(--success);
-            color: white;
-            font-size: 10px;
-            font-weight: 600;
-            padding: 2px 6px;
-            border-radius: 10px;
-        }
-
-        /* Enhanced protagonist selection */
-        .protagonist-selection {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 12px;
-        }
-
-        .protagonist-radio {
-            width: 16px;
-            height: 16px;
-            border: 2px solid var(--border);
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.2s;
-            position: relative;
-        }
-
-        .protagonist-radio.checked {
-            border-color: var(--accent-orange);
-            background: var(--accent-orange);
-        }
-
-        .protagonist-radio.checked::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 6px;
-            height: 6px;
-            background: white;
-            border-radius: 50%;
-        }
-
-        .protagonist-label {
-            font-size: 12px;
-            color: var(--text-secondary);
-            cursor: pointer;
-        }
-
-        /* Help text for keyboard shortcuts */
-        .keyboard-help {
-            font-size: 11px;
-            color: var(--text-muted);
-            text-align: center;
-            margin-top: 8px;
-            opacity: 0.8;
-        }
-
+        
         /* Responsive */
         @media (max-width: 1200px) {
-            .content-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .chat-section {
-                max-height: 400px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .main-content {
-                padding: 16px;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .workflow-steps {
-                overflow-x: auto;
-                gap: 12px;
-            }
-
-            .header {
-                padding: 10px 16px;
-            }
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-tertiary);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--border-light);
-            border-radius: 3px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--text-muted);
+            .main-grid { grid-template-columns: 1fr; gap: 20px; }
+            .chat-section { max-height: 400px; }
         }
     </style>
 </head>
 <body>
-    <!-- Compact Header -->
-    <div class="header">
-        <div class="header-left">
-            <h1 class="page-title">Story</h1>
-            <div class="project-info">Alien attacking mars | Episode 1</div>
-        </div>
-    </div>
+    <!-- Header -->
+    <header class="header">
+        <h1 class="page-title">Story</h1>
+        <div class="project-info">Alien attacking mars | Episode 1</div>
+    </header>
 
-    <!-- Compact Workflow Steps -->
-    <div class="workflow-steps">
+    <!-- Workflow Steps -->
+    <nav class="workflow">
         <div class="step complete">
             <div class="step-number">1</div>
-            <div class="step-label">Characters</div>
+            <div>Characters</div>
         </div>
         <div class="step active">
             <div class="step-number">2</div>
-            <div class="step-label">Story</div>
+            <div>Story</div>
         </div>
         <div class="step inactive">
             <div class="step-number">3</div>
-            <div class="step-label">Visuals</div>
+            <div>Visuals</div>
         </div>
         <div class="step inactive">
             <div class="step-number">4</div>
-            <div class="step-label">Export</div>
+            <div>Export</div>
         </div>
-    </div>
+    </nav>
 
     <!-- Main Content -->
-    <div class="main-content">
-        <div class="content-grid">
-            <!-- Character List Sidebar -->
-            <div class="character-sidebar">
-                <div class="characters-header">
+    <main class="container">
+        <div class="main-grid">
+            <!-- Character Sidebar -->
+            <aside class="character-sidebar">
+                <div class="sidebar-header">
                     <span>Script Characters</span>
-                    <button class="add-character-btn" id="addCharacterBtn" title="Add Character">+</button>
+                    <button class="add-btn">+</button>
                 </div>
                 
-                <!-- Selected Characters for Script -->
-                <div class="character-item selected" data-character="emma">
-                    <button class="remove-character-btn" onclick="removeCharacter('emma')">×</button>
-                    <div class="character-content">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' fill='%23262647' rx='6'/%3E%3Cg transform='translate(24 24)'%3E%3Ccircle r='10' fill='%23d4a574' opacity='0.8'/%3E%3Cpath d='M-5,-2 Q0,-7 5,-2 Q5,4 0,6 Q-5,4 -5,-2 Z' fill='%23c19660'/%3E%3Ccircle cx='-2' cy='-1' r='1' fill='%23333'/%3E%3Ccircle cx='2' cy='-1' r='1' fill='%23333'/%3E%3Cpath d='M-1,2 Q0,4 1,2' stroke='%23333' stroke-width='1' fill='none'/%3E%3Crect x='-6' y='10' width='12' height='14' rx='2' fill='%23444'/%3E%3C/g%3E%3C/svg%3E" alt="Emma" class="character-thumbnail">
-                        <div class="character-info">
-                            <div class="character-name">Emma Sterling</div>
-                            <div class="character-role">Lead archaeologist</div>
-                            <div class="protagonist-badge">★ PROTAGONIST</div>
-                        </div>
-                    </div>
+                <!-- Character Cards -->
+                <div class="character-card hovered">
+                    <button class="remove-btn">×</button>
+                    <div class="character-avatar">E</div>
+                    <div class="character-name">Emma Sterling</div>
+                    <div class="character-role">Lead archaeologist</div>
+                    <div class="protagonist-badge">★ PROTAGONIST</div>
                 </div>
 
-                <div class="character-item selected" data-character="marcus">
-                    <button class="remove-character-btn" onclick="removeCharacter('marcus')">×</button>
-                    <div class="character-content">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' fill='%23262647' rx='6'/%3E%3Cg transform='translate(24 24)'%3E%3Ccircle r='10' fill='%23b89876' opacity='0.8'/%3E%3Cpath d='M-5,-2 Q0,-7 5,-2 Q5,4 0,6 Q-5,4 -5,-2 Z' fill='%23a08264'/%3E%3Ccircle cx='-2' cy='-1' r='1' fill='%23333'/%3E%3Ccircle cx='2' cy='-1' r='1' fill='%23333'/%3E%3Cpath d='M-1,2 Q0,4 1,2' stroke='%23333' stroke-width='1' fill='none'/%3E%3Crect x='-6' y='10' width='12' height='14' rx='2' fill='%23666'/%3E%3C/g%3E%3C/svg%3E" alt="Marcus" class="character-thumbnail">
-                        <div class="character-info">
-                            <div class="character-name">Marcus Wright</div>
-                            <div class="character-role">Security expert</div>
-                        </div>
-                    </div>
+                <div class="character-card">
+                    <button class="remove-btn" style="display: none;">×</button>
+                    <div class="character-avatar">M</div>
+                    <div class="character-name">Marcus Wright</div>
+                    <div class="character-role">Security expert</div>
                 </div>
 
-                <!-- Story Parameters (shown after generation) -->
-                <div class="story-parameters" id="storyParameters">
-                    <div class="story-parameters-header">
-                        📋 Story Settings
+                <!-- Story Parameters -->
+                <div class="story-params">
+                    <div class="params-header">📋 Story Settings</div>
+                    <div class="param-item">
+                        <span class="param-label">Setting: </span>
+                        <span class="param-value">Amazon rainforest ruins</span>
                     </div>
-                    <div class="parameter-item">
-                        <span class="parameter-label">Setting:</span>
-                        <span class="parameter-value" id="paramSetting">Amazon rainforest ruins</span>
+                    <div class="param-item">
+                        <span class="param-label">Theme: </span>
+                        <span class="param-value">Alien technology discovery</span>
                     </div>
-                    <div class="parameter-item">
-                        <span class="parameter-label">Theme:</span>
-                        <span class="parameter-value" id="paramTheme">Alien technology discovery</span>
+                    <div class="param-item">
+                        <span class="param-label">Mood: </span>
+                        <span class="param-value">Suspenseful</span>
                     </div>
-                    <div class="parameter-item">
-                        <span class="parameter-label">Mood:</span>
-                        <span class="parameter-value" id="paramMood">Suspenseful</span>
-                    </div>
-                    <div class="parameter-item">
-                        <span class="parameter-label">Duration:</span>
-                        <span class="parameter-value" id="paramDuration">3 minutes</span>
-                    </div>
-                    <div class="parameter-item">
-                        <span class="parameter-label">Narrator:</span>
-                        <span class="parameter-value" id="paramNarrator">Professional Narrator</span>
+                    <div class="param-item">
+                        <span class="param-label">Duration: </span>
+                        <span class="param-value">3 minutes</span>
                     </div>
                 </div>
-            </div>
+            </aside>
 
-            <!-- Main Storyboard Card -->
-            <div class="main-storyboard-card">
-                <!-- Storyboard Placeholder/Results -->
-                <div class="storyboard-placeholder" id="storyboardPlaceholder">
+            <!-- Main Content -->
+            <section class="main-content">
+                <!-- Storyboard Placeholder -->
+                <div class="placeholder">
                     <div class="placeholder-icon">🎬</div>
                     <div class="placeholder-text">Storyboard Preview</div>
                     <div class="placeholder-subtext">Generate script to see voiced segments with timing</div>
                 </div>
 
-                <!-- Storyboard Results (Hidden initially) -->
-                <div class="storyboard-results hidden" id="storyboardResults">
-                    <div class="storyboard-header">
-                        <h3 class="storyboard-title">📋 Script Segments</h3>
-                        <div class="storyboard-stats">
-                            <span>Duration: <strong id="totalDuration">0:00</strong></span>
-                            <span>Segments: <strong id="segmentCount">0</strong></span>
+                <!-- Parameters Section -->
+                <div class="params-section">
+                    <div class="params-header-main">
+                        <div>
+                            <div class="section-title">Story Parameters</div>
+                            <div class="section-summary">Click to configure script generation settings</div>
                         </div>
-                    </div>
-                    <div class="storyboard-content" id="storyboardContent">
-                        <!-- Generated segments will appear here -->
-                    </div>
-                    <div class="keyboard-help">
-                        ⌨️ Enter: Split | Delete/Backspace: Merge | Ctrl+Z: Undo | Click: Select & Edit
-                    </div>
-                </div>
-
-                <!-- Parameters Section - Collapsible -->
-                <div class="parameters-section">
-                    <div class="parameters-header" id="parametersHeader">
-                        <div class="parameters-title">
-                            <h2 class="section-title">Story Parameters</h2>
-                            <div class="parameters-summary" id="parametersSummary">Click to configure script generation settings</div>
-                        </div>
-                        <svg class="expand-arrow" id="expandArrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path d="M9 18l6-6-6-6"/>
-                        </svg>
+                        <div class="expand-arrow">▶</div>
                     </div>
 
-                    <div class="parameters-content collapsed" id="parametersContent">
-                        <!-- Script Settings -->
+                    <!-- Form (showing hover/focus states) -->
+                    <div>
                         <div class="form-grid">
                             <div class="form-group">
                                 <label class="form-label">Setting/Location</label>
-                                <input type="text" class="form-input" id="setting" placeholder="Ancient ruins in Amazon rainforest" value="Ancient ruins in Amazon rainforest">
+                                <input type="text" class="form-input" value="Ancient ruins in Amazon rainforest">
                             </div>
-
                             <div class="form-group">
                                 <label class="form-label">Theme/Main Idea</label>
-                                <input type="text" class="form-input" id="theme" placeholder="Discovering hidden alien technology" value="Discovering hidden alien technology">
+                                <input type="text" class="form-input" value="Discovering hidden alien technology">
                             </div>
-
                             <div class="form-group">
                                 <label class="form-label">Mood</label>
-                                <select class="form-select" id="mood">
-                                    <option value="suspenseful" selected>Suspenseful</option>
-                                    <option value="adventurous">Adventurous</option>
-                                    <option value="mysterious">Mysterious</option>
-                                    <option value="dramatic">Dramatic</option>
-                                    <option value="action-packed">Action-packed</option>
+                                <select class="form-select">
+                                    <option selected>Suspenseful</option>
+                                    <option>Adventurous</option>
+                                    <option>Mysterious</option>
                                 </select>
                             </div>
-
                             <div class="form-group">
                                 <label class="form-label">Target Duration (minutes)</label>
-                                <input type="number" class="form-input" id="targetDuration" placeholder="3" value="3" min="1" max="10">
-                                <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">≈ 450 words estimated</div>
+                                <input type="number" class="form-input" value="3">
+                                <div class="form-helper">≈ 450 words estimated</div>
                             </div>
-
-                            <div class="form-group full-width">
+                            <div class="form-group full">
                                 <label class="form-label">Additional Notes</label>
-                                <textarea class="form-textarea" id="notes" placeholder="Any specific requirements or story elements to include..."></textarea>
+                                <textarea class="form-textarea" placeholder="Any specific requirements..."></textarea>
                             </div>
                         </div>
 
-                        <!-- Voice Configuration Section -->
-                        <div class="voice-section" id="narratorVoiceSection">
+                        <!-- Voice Section -->
+                        <div class="voice-section">
                             <div class="voice-header">
-                                <h4 class="voice-title">
-                                    🎤 Narrator Voice
-                                </h4>
-                                <button class="smart-selection-btn" onclick="openNarratorSmartSelection()">
-                                    🎯 Smart Selection
-                                </button>
+                                <div class="voice-title">🎤 Narrator Voice</div>
+                                <button class="smart-btn">🎯 Smart Selection</button>
                             </div>
-
-                            <!-- Manual Voice Input -->
-                            <div id="noNarratorVoiceState">
-                                <div class="voice-input-group">
-                                    <input type="text" class="form-input voice-input" placeholder="Voice ID (e.g., 21m00Tcm4TlvDq8ikWAM)" id="narratorVoiceId">
-                                    <div class="voice-actions">
-                                        <button class="validate-btn" onclick="validateNarratorVoice()">Validate</button>
-                                        <button class="test-voice-btn" onclick="testNarratorVoice()">Test</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Selected Voice Display -->
-                            <div id="selectedNarratorVoiceState" style="display: none;">
-                                <div class="selected-voice">
-                                    <div class="selected-voice-header">
-                                        <div class="selected-voice-info">
-                                            <div class="selected-voice-name" id="selectedNarratorVoiceName">Professional Narrator</div>
-                                            <div class="selected-voice-id" id="selectedNarratorVoiceId">21m00Tcm4TlvDq8ikWAM</div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="selected-voice-description" id="selectedNarratorVoiceDescription">
-                                        Deep, authoritative voice perfect for storytelling and narration
-                                    </div>
-                                    
-                                    <div class="selected-voice-controls">
-                                        <button class="play-voice-btn" onclick="playNarratorVoice()">
-                                            ▶️ Play Voice
-                                        </button>
-                                        <button class="change-voice-btn" onclick="changeNarratorVoice()">
-                                            🔄 Change
-                                        </button>
-                                    </div>
+                            <div class="voice-input-group">
+                                <input type="text" class="form-input voice-input" placeholder="Voice ID (e.g., 21m00Tcm4TlvDq8ikWAM)">
+                                <div class="voice-actions">
+                                    <button class="action-btn">Validate</button>
+                                    <button class="action-btn">Test</button>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Generate Button -->
-                        <div class="generate-section">
-                            <button class="generate-btn" onclick="generateStoryboard()">
-                                🎬 Generate Story & Voiceover
-                            </button>
-                        </div>
+                        <button class="generate-btn">🎬 Generate Story & Voiceover</button>
                     </div>
                 </div>
-            </div>
+            </section>
 
             <!-- Chat Section -->
-            <div class="chat-section">
+            <aside class="chat-section">
                 <div class="chat-header">
                     <span>🤖</span>
-                    <h3>AI Assistant</h3>
+                    <h3 class="chat-title">AI Assistant</h3>
                 </div>
-                <div class="chat-messages" id="chatMessages">
+                <div class="chat-messages">
                     <div class="chat-message assistant">
                         <div class="chat-avatar">🤖</div>
                         <div class="chat-bubble">
                             Ready to create your story! Emma Sterling (protagonist) and Marcus Wright are selected. Set your target duration and configure the narrator voice to get started.
                         </div>
                     </div>
-                </div>
-                <div class="chat-input-container">
-                    <div class="chat-input-wrapper">
-                        <textarea 
-                            class="chat-input" 
-                            placeholder="Ask about story generation..."
-                            id="chatInput"
-                            rows="1"
-                        ></textarea>
-                        <button class="chat-send-btn" onclick="sendChatMessage()">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M2,21L23,12L2,3V10L17,12L2,14V21Z"/>
-                            </svg>
-                        </button>
+                    <div class="chat-message user">
+                        <div class="chat-avatar">👤</div>
+                        <div class="chat-bubble">How do I add more characters?</div>
+                    </div>
+                    <div class="chat-message assistant">
+                        <div class="chat-avatar">🤖</div>
+                        <div class="chat-bubble">
+                            Click the "+" button in the Script Characters section to add more characters. You can have up to 5 characters total.
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="chat-input-area">
+                    <textarea class="chat-input" placeholder="Ask about story generation..." rows="1"></textarea>
+                    <button class="chat-send">→</button>
+                </div>
+            </aside>
         </div>
-    </div>
+    </main>
 
     <!-- Footer -->
-    <div class="footer">
-        <div style="font-size: 11px; color: var(--text-muted);" id="footerStatus">
-            Selected: Emma Sterling (protagonist), Marcus Wright
-        </div>
+    <footer class="footer">
+        <div class="footer-status">Selected: Emma Sterling (protagonist), Marcus Wright</div>
         <div class="footer-buttons">
-            <button class="btn btn-secondary">← Back</button>
-            <button class="btn btn-primary" id="continueBtn" disabled>Next →</button>
+            <button class="footer-btn secondary">← Back</button>
+            <button class="footer-btn primary">Next →</button>
         </div>
-    </div>
-
-    <!-- Character Selection Modal -->
-    <div class="modal-overlay" id="characterSelectionModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">➕ Add Character to Script</h2>
-                <button class="modal-close" id="closeCharacterModal">&times;</button>
-            </div>
-
-            <div class="modal-body">
-                <!-- Character Selection Step -->
-                <div id="characterSelectionStep">
-                    <p style="margin-bottom: 16px; color: var(--text-secondary);">Choose a character to add to your script (max 5 characters, only 1 protagonist allowed):</p>
-                    <div class="character-grid" id="availableCharacters">
-                        <div class="loading-state">
-                            <div class="status-spinner"></div>
-                            <div class="loading-text">Loading your characters...</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Character Configuration Step -->
-                <div id="characterConfigStep" style="display: none;">
-                    <div style="text-align: center; margin-bottom: 20px;">
-                        <img id="configCharacterThumbnail" src="" alt="" style="width: 80px; height: 80px; border-radius: 12px; margin-bottom: 12px;">
-                        <h3 id="configCharacterName" style="color: var(--text-primary); margin-bottom: 4px;"></h3>
-                        <p id="configCharacterOriginalRole" style="color: var(--text-muted); font-size: 13px;"></p>
-                    </div>
-
-                    <div class="form-grid" style="gap: 16px;">
-                        <div class="form-group">
-                            <label class="form-label">Role in this script</label>
-                            <input type="text" class="form-input" id="characterScriptRole" placeholder="e.g., Security expert, Scientific advisor, Mission leader">
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Character type in story</label>
-                            <select class="form-select" id="characterType">
-                                <option value="supporting">Supporting Character</option>
-                                <option value="antagonist">Antagonist</option>
-                                <option value="protagonist">Protagonist (Main Character)</option>
-                            </select>
-                            <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">
-                                Choose the character's narrative function in your story
-                            </div>
-                        </div>
-
-                        <div class="form-group full-width">
-                            <label class="form-label">Character background for this story (optional)</label>
-                            <textarea class="form-textarea" id="characterNotes" placeholder="Any specific personality traits, motivations, or background details relevant to this story..."></textarea>
-                        </div>
-
-                        <!-- Character Type Explanations -->
-                        <div class="form-group full-width">
-                            <div style="background: var(--bg-secondary); padding: 12px; border-radius: 6px; font-size: 12px;">
-                                <div style="margin-bottom: 8px; color: var(--text-primary); font-weight: 600;">Character Types:</div>
-                                <div style="margin-bottom: 4px;"><strong style="color: var(--accent-orange);">Protagonist:</strong> Main character driving the story (only 1 allowed)</div>
-                                <div style="margin-bottom: 4px;"><strong style="color: var(--accent-blue);">Supporting:</strong> Helper, ally, or secondary character</div>
-                                <div><strong style="color: var(--error);">Antagonist:</strong> Opposition, villain, or conflicting force</div>
-                            </div>
-                        </div>
-
-                        <!-- Protagonist Selection Warning -->
-                        <div class="form-group full-width" id="protagonistWarning" style="display: none;">
-                            <div style="background: var(--warning); color: #000; padding: 12px; border-radius: 6px; font-size: 12px; border-left: 4px solid var(--accent-orange);">
-                                <strong>⚠️ Protagonist Already Selected</strong><br>
-                                <span id="currentProtagonistName">Emma Sterling</span> is currently the protagonist. Selecting "Protagonist" for this character will make them the new main character and change the previous protagonist to a supporting role.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal-footer">
-                <button class="btn btn-secondary" id="cancelCharacterSelection">
-                    Cancel
-                </button>
-                <button class="btn btn-secondary" id="backToCharacterSelection" style="display: none;">
-                    ← Back
-                </button>
-                <button class="btn btn-primary" id="nextToConfig" disabled>
-                    Next →
-                </button>
-                <button class="btn btn-primary" id="addConfiguredCharacter" style="display: none;">
-                    ✓ Add to Script
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Smart Selection Modal for Narrator -->
-    <div class="modal-overlay" id="narratorSmartSelectionModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">🎯 Smart Narrator Voice Selection</h2>
-                <button class="modal-close" onclick="closeNarratorSmartSelection()">&times;</button>
-            </div>
-
-            <div class="modal-body">
-                <div class="voice-candidates" id="narratorVoiceCandidates">
-                    <div class="loading-state">
-                        <div class="status-spinner"></div>
-                        <div class="loading-text">Finding narrator voices...</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="closeNarratorSmartSelection()">
-                    Cancel
-                </button>
-                <button class="btn btn-primary" id="selectNarratorVoiceBtn" onclick="selectNarratorVoice()" disabled>
-                    ✓ Select Voice
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Sample available characters
-        const availableCharacters = [
-            {
-                id: "luna",
-                name: "Luna Shadowheart",
-                role: "Mysterious guide",
-                type: "supporting",
-                thumbnail: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23262647' rx='8'/%3E%3Cg transform='translate(32 32)'%3E%3Ccircle r='12' fill='%236b9bd1' opacity='0.8'/%3E%3Cpath d='M-6,-1 Q0,-8 6,-1 Q6,4 0,6 Q-6,4 -6,-1 Z' fill='%234a90a4'/%3E%3Ccircle cx='-3' cy='-1' r='1.5' fill='%23333'/%3E%3Ccircle cx='3' cy='-1' r='1.5' fill='%23333'/%3E%3Cpath d='M-1.5,2 Q0,4 1.5,2' stroke='%23333' stroke-width='1' fill='none'/%3E%3Crect x='-8' y='12' width='16' height='20' rx='2' fill='%23555'/%3E%3C/g%3E%3C/svg%3E"
-            },
-            {
-                id: "zara",
-                name: "Dr. Zara Chen",
-                role: "Xenobiologist",
-                type: "supporting",
-                thumbnail: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23262647' rx='8'/%3E%3Cg transform='translate(32 32)'%3E%3Ccircle r='12' fill='%23c4a574' opacity='0.8'/%3E%3Cpath d='M-6,-2 Q0,-8 6,-2 Q6,4 0,6 Q-6,4 -6,-2 Z' fill='%23b39660'/%3E%3Ccircle cx='-3' cy='-1' r='1.5' fill='%23333'/%3E%3Ccircle cx='3' cy='-1' r='1.5' fill='%23333'/%3E%3Cpath d='M-1.5,2 Q0,4 1.5,2' stroke='%23333' stroke-width='1' fill='none'/%3E%3Crect x='-8' y='12' width='16' height='20' rx='2' fill='%23666'/%3E%3C/g%3E%3C/svg%3E"
-            },
-            {
-                id: "captain_vex",
-                name: "Captain Vex",
-                role: "Alien commander",
-                type: "antagonist",
-                thumbnail: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23262647' rx='8'/%3E%3Cg transform='translate(32 32)'%3E%3Ccircle r='12' fill='%23734a73' opacity='0.8'/%3E%3Cpath d='M-6,-1 Q0,-9 6,-1 Q6,2 0,4 Q-6,2 -6,-1 Z' fill='%235c3a5c'/%3E%3Ccircle cx='-3' cy='-2' r='1.5' fill='%23ff4444'/%3E%3Ccircle cx='3' cy='-2' r='1.5' fill='%23ff4444'/%3E%3Cpath d='M-2,1 Q0,3 2,1' stroke='%23333' stroke-width='1' fill='none'/%3E%3Crect x='-8' y='12' width='16' height='20' rx='2' fill='%23444'/%3E%3C/g%3E%3C/svg%3E"
-            },
-            {
-                id: "alex",
-                name: "Alex Rivers",
-                role: "Tech specialist",
-                type: "supporting",
-                thumbnail: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23262647' rx='8'/%3E%3Cg transform='translate(32 32)'%3E%3Ccircle r='12' fill='%23a67c52' opacity='0.8'/%3E%3Cpath d='M-6,-2 Q0,-8 6,-2 Q6,4 0,6 Q-6,4 -6,-2 Z' fill='%23936b47'/%3E%3Ccircle cx='-3' cy='-1' r='1.5' fill='%23333'/%3E%3Ccircle cx='3' cy='-1' r='1.5' fill='%23333'/%3E%3Cpath d='M-1.5,2 Q0,4 1.5,2' stroke='%23333' stroke-width='1' fill='none'/%3E%3Crect x='-8' y='12' width='16' height='20' rx='2' fill='%23777'/%3E%3C/g%3E%3C/svg%3E"
-            },
-            {
-                id: "maya",
-                name: "Maya Okafor",
-                role: "Communications officer",
-                type: "supporting",
-                thumbnail: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23262647' rx='8'/%3E%3Cg transform='translate(32 32)'%3E%3Ccircle r='12' fill='%23654321' opacity='0.8'/%3E%3Cpath d='M-6,-2 Q0,-8 6,-2 Q6,4 0,6 Q-6,4 -6,-2 Z' fill='%23543319'/%3E%3Ccircle cx='-3' cy='-1' r='1.5' fill='%23333'/%3E%3Ccircle cx='3' cy='-1' r='1.5' fill='%23333'/%3E%3Cpath d='M-1.5,2 Q0,4 1.5,2' stroke='%23333' stroke-width='1' fill='none'/%3E%3Crect x='-8' y='12' width='16' height='20' rx='2' fill='%23888'/%3E%3C/g%3E%3C/svg%3E"
-            },
-            {
-                id: "nova",
-                name: "Nova",
-                role: "AI consciousness",
-                type: "supporting",
-                thumbnail: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23262647' rx='8'/%3E%3Cg transform='translate(32 32)'%3E%3Ccircle r='12' fill='%2300ffff' opacity='0.6'/%3E%3Cpath d='M-6,-2 Q0,-8 6,-2 Q6,4 0,6 Q-6,4 -6,-2 Z' fill='%2300cccc'/%3E%3Ccircle cx='-3' cy='-1' r='1.5' fill='%2300ffff'/%3E%3Ccircle cx='3' cy='-1' r='1.5' fill='%2300ffff'/%3E%3Cpath d='M-1.5,2 Q0,4 1.5,2' stroke='%2300cccc' stroke-width='1' fill='none'/%3E%3Crect x='-8' y='12' width='16' height='20' rx='2' fill='%23333'/%3E%3C/g%3E%3C/svg%3E"
-            }
-        ];
-
-        // Sample narrator voices for smart selection
-        const mockNarratorVoices = [
-            {
-                voice_id: "21m00Tcm4TlvDq8ikWAM",
-                name: "Professional Narrator",
-                description: "Deep, authoritative voice perfect for storytelling and documentary narration"
-            },
-            {
-                voice_id: "ErXwobaYiN019PkySvjV", 
-                name: "Warm Storyteller",
-                description: "Friendly, engaging voice ideal for adventure stories and character-driven narratives"
-            },
-            {
-                voice_id: "VR6AewLTigWG4xSOukaG",
-                name: "Dramatic Reader", 
-                description: "Rich, expressive voice with theatrical quality perfect for suspenseful content"
-            }
-        ];
-
-        // Sample storyboard data
-        const sampleStoryboardData = [
-            {
-                id: 1,
-                text: "Deep in the Amazon rainforest, Dr. Emma Sterling pushes through the dense undergrowth, her eyes fixed on the ancient stone structures ahead.",
-                character: "Narrator",
-                duration: "00:08"
-            },
-            {
-                id: 2,
-                text: "The ruins seem to pulse with an otherworldly energy, covered in symbols that don't match any known civilization.",
-                character: "Narrator",
-                duration: "00:07"
-            },
-            {
-                id: 3,
-                text: "Emma, we need to be careful. These readings are off the charts.",
-                character: "Marcus Wright",
-                duration: "00:04"
-            },
-            {
-                id: 4,
-                text: "Marcus Wright, her trusted security expert, scans the area with his advanced equipment, concern etched on his weathered face.",
-                character: "Narrator",
-                duration: "00:06"
-            },
-            {
-                id: 5,
-                text: "As Emma approaches the central structure, a brilliant light emanates from within, revealing technology that shouldn't exist on Earth.",
-                character: "Narrator",
-                duration: "00:09"
-            }
-        ];
-
-        // Global variables
-        let selectedCharacterToAdd = null;
-        let selectedNarratorVoiceFromModal = null;
-        let currentlyPlayingSegment = null;
-        let selectedSegment = null;
-
-        // =============================================================================
-        // CHARACTER MANAGEMENT FUNCTIONS
-        // =============================================================================
-
-        function openCharacterSelectionModal() {
-            document.getElementById('characterSelectionModal').classList.add('show');
-            resetCharacterModal();
-            loadAvailableCharacters();
-        }
-
-        function closeCharacterSelectionModal() {
-            document.getElementById('characterSelectionModal').classList.remove('show');
-            selectedCharacterToAdd = null;
-            resetCharacterModal();
-        }
-
-        function resetCharacterModal() {
-            // Show selection step, hide config step
-            document.getElementById('characterSelectionStep').style.display = 'block';
-            document.getElementById('characterConfigStep').style.display = 'none';
-            
-            // Show/hide appropriate buttons
-            document.getElementById('nextToConfig').style.display = 'inline-block';
-            document.getElementById('nextToConfig').disabled = true;
-            document.getElementById('backToCharacterSelection').style.display = 'none';
-            document.getElementById('addConfiguredCharacter').style.display = 'none';
-            
-            // Clear selection
-            selectedCharacterToAdd = null;
-            document.querySelectorAll('.available-character').forEach(el => {
-                el.classList.remove('selected');
-            });
-        }
-
-        function loadAvailableCharacters() {
-            const container = document.getElementById('availableCharacters');
-            
-            // Get currently selected character IDs
-            const selectedCharacterIds = Array.from(document.querySelectorAll('.character-item[data-character]'))
-                .map(item => item.getAttribute('data-character'));
-            
-            setTimeout(() => {
-                container.innerHTML = availableCharacters.map(character => {
-                    const isAlreadyAdded = selectedCharacterIds.includes(character.id);
-                    
-                    return `
-                        <div class="available-character ${isAlreadyAdded ? 'already-added' : ''}" 
-                             data-character-id="${character.id}"
-                             id="available-character-${character.id}">
-                            ${isAlreadyAdded ? '<div class="already-added-badge">Added</div>' : ''}
-                            <img src="${character.thumbnail}" alt="${character.name}" class="available-character-thumbnail">
-                            <div class="available-character-name">${character.name}</div>
-                            <div class="available-character-role">${character.role}</div>
-                            <div class="character-tags">
-                                <span class="character-tag-small ${character.type}">${character.type.toUpperCase()}</span>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-                
-                // Add click listeners to character cards
-                document.querySelectorAll('.available-character:not(.already-added)').forEach(card => {
-                    card.addEventListener('click', function() {
-                        const characterId = this.getAttribute('data-character-id');
-                        selectCharacterToAdd(characterId);
-                    });
-                });
-            }, 1000);
-        }
-
-        function selectCharacterToAdd(characterId) {
-            // Check if we already have 5 characters
-            const currentCharacterCount = document.querySelectorAll('.character-item.selected').length;
-            if (currentCharacterCount >= 5) {
-                addChatMessage('assistant', 'Maximum of 5 characters allowed per script. Please remove a character first.');
-                return;
-            }
-
-            // Remove selection from other characters
-            document.querySelectorAll('.available-character').forEach(el => {
-                el.classList.remove('selected');
-            });
-            
-            // Select the clicked character
-            const characterEl = document.getElementById(`available-character-${characterId}`);
-            if (characterEl && !characterEl.classList.contains('already-added')) {
-                characterEl.classList.add('selected');
-                selectedCharacterToAdd = availableCharacters.find(c => c.id === characterId);
-                document.getElementById('nextToConfig').disabled = false;
-            }
-        }
-
-        function showCharacterConfigStep() {
-            if (!selectedCharacterToAdd) return;
-            
-            // Hide selection step, show config step
-            document.getElementById('characterSelectionStep').style.display = 'none';
-            document.getElementById('characterConfigStep').style.display = 'block';
-            
-            // Update button visibility
-            document.getElementById('nextToConfig').style.display = 'none';
-            document.getElementById('backToCharacterSelection').style.display = 'inline-block';
-            document.getElementById('addConfiguredCharacter').style.display = 'inline-block';
-            
-            // Populate character info
-            const character = selectedCharacterToAdd;
-            document.getElementById('configCharacterThumbnail').src = character.thumbnail;
-            document.getElementById('configCharacterName').textContent = character.name;
-            document.getElementById('configCharacterOriginalRole').textContent = `Original role: ${character.role}`;
-            
-            // Set default values
-            document.getElementById('characterScriptRole').value = character.role;
-            document.getElementById('characterType').value = character.type;
-            document.getElementById('characterNotes').value = '';
-
-            // Check if protagonist already exists and show warning
-            updateProtagonistWarning();
-            
-            // Add event listener for character type change
-            document.getElementById('characterType').addEventListener('change', updateProtagonistWarning);
-        }
-
-        function updateProtagonistWarning() {
-            const selectedType = document.getElementById('characterType').value;
-            const protagonistWarning = document.getElementById('protagonistWarning');
-            const currentProtagonistElement = document.querySelector('.protagonist-badge');
-            
-            if (selectedType === 'protagonist' && currentProtagonistElement) {
-                // Find the current protagonist's name
-                const currentProtagonistItem = currentProtagonistElement.closest('.character-item');
-                const currentProtagonistName = currentProtagonistItem ? 
-                    currentProtagonistItem.querySelector('.character-name').textContent : 
-                    'Current character';
-                
-                // Update the warning message with the current protagonist's name
-                document.getElementById('currentProtagonistName').textContent = currentProtagonistName;
-                protagonistWarning.style.display = 'block';
-            } else {
-                protagonistWarning.style.display = 'none';
-            }
-        }
-
-        function backToCharacterSelection() {
-            // Show selection step, hide config step
-            document.getElementById('characterSelectionStep').style.display = 'block';
-            document.getElementById('characterConfigStep').style.display = 'none';
-            
-            // Update button visibility
-            document.getElementById('nextToConfig').style.display = 'inline-block';
-            document.getElementById('nextToConfig').disabled = false;
-            document.getElementById('backToCharacterSelection').style.display = 'none';
-            document.getElementById('addConfiguredCharacter').style.display = 'none';
-        }
-
-        function addConfiguredCharacterToScript() {
-            if (!selectedCharacterToAdd) return;
-            
-            const character = selectedCharacterToAdd;
-            const scriptRole = document.getElementById('characterScriptRole').value || character.role;
-            const characterType = document.getElementById('characterType').value;
-            const notes = document.getElementById('characterNotes').value;
-            
-            // If making this character protagonist, remove protagonist status from others
-            if (characterType === 'protagonist') {
-                const existingProtagonist = document.querySelector('.protagonist-badge');
-                if (existingProtagonist) {
-                    const existingProtagonistItem = existingProtagonist.closest('.character-item');
-                    const existingProtagonistName = existingProtagonistItem.querySelector('.character-name').textContent;
-                    
-                    // Remove the protagonist badge
-                    existingProtagonist.remove();
-                    
-                    addChatMessage('assistant', `${existingProtagonistName} is now a supporting character. ${character.name} is the new protagonist.`);
-                }
-            }
-            
-            const newCharacterHtml = `
-                <div class="character-item selected" data-character="${character.id}">
-                    <button class="remove-character-btn" onclick="removeCharacter('${character.id}')">×</button>
-                    <div class="character-content">
-                        <img src="${character.thumbnail}" alt="${character.name}" class="character-thumbnail">
-                        <div class="character-info">
-                            <div class="character-name">${character.name}</div>
-                            <div class="character-role">${scriptRole}</div>
-                            ${characterType === 'protagonist' ? '<div class="protagonist-badge">★ PROTAGONIST</div>' : ''}
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            const storyParams = document.getElementById('storyParameters');
-            storyParams.insertAdjacentHTML('beforebegin', newCharacterHtml);
-            
-            updateFooterStatus();
-            
-            // Create descriptive message based on character type
-            let typeDescription = '';
-            switch(characterType) {
-                case 'protagonist':
-                    typeDescription = 'protagonist (main character)';
-                    break;
-                case 'antagonist':
-                    typeDescription = 'antagonist (opposing force)';
-                    break;
-                case 'supporting':
-                    typeDescription = 'supporting character';
-                    break;
-            }
-            
-            let roleMessage = `Added ${character.name} as ${scriptRole} - ${typeDescription}`;
-            if (notes) {
-                roleMessage += `. Background: ${notes}`;
-            }
-            
-            addChatMessage('assistant', roleMessage + '.');
-            closeCharacterSelectionModal();
-        }
-
-        function removeCharacter(characterId) {
-            const characterItem = document.querySelector(`[data-character="${characterId}"]`);
-            if (characterItem) {
-                characterItem.remove();
-                addChatMessage('assistant', `Removed character from the script.`);
-                updateFooterStatus();
-            }
-        }
-
-        function updateFooterStatus() {
-            const selectedCharacters = document.querySelectorAll('.character-item.selected');
-            const names = Array.from(selectedCharacters).map(item => {
-                const name = item.querySelector('.character-name').textContent;
-                const isProtagonist = item.querySelector('.protagonist-badge');
-                return isProtagonist ? `${name} (protagonist)` : name;
-            });
-            
-            const footerStatus = document.getElementById('footerStatus');
-            footerStatus.textContent = `Selected: ${names.join(', ')}`;
-        }
-
-        // =============================================================================
-        // PARAMETERS SECTION FUNCTIONS
-        // =============================================================================
-
-        function toggleParameters() {
-            const content = document.getElementById('parametersContent');
-            const arrow = document.getElementById('expandArrow');
-            
-            if (content.classList.contains('collapsed')) {
-                content.classList.remove('collapsed');
-                content.classList.add('expanded');
-                arrow.classList.add('expanded');
-                addChatMessage('assistant', 'Story parameters expanded. Configure your script settings and narrator voice.');
-            } else {
-                content.classList.remove('expanded');
-                content.classList.add('collapsed');
-                arrow.classList.remove('expanded');
-                addChatMessage('assistant', 'Parameters collapsed to keep the interface clean.');
-            }
-        }
-
-        function updateParametersSummary() {
-            const setting = document.getElementById('setting').value || 'No setting';
-            const theme = document.getElementById('theme').value || 'No theme';
-            const mood = document.getElementById('mood').value || 'No mood';
-            const duration = document.getElementById('targetDuration').value || '0';
-            
-            const wordEstimate = Math.round(duration * 150);
-            const estimateText = document.querySelector('.form-group div');
-            if (estimateText) {
-                estimateText.textContent = `≈ ${wordEstimate} words estimated`;
-            }
-            
-            const summary = `${setting} • ${theme} • ${mood} • ${duration} min target`;
-            document.getElementById('parametersSummary').textContent = summary;
-        }
-
-        // =============================================================================
-        // VOICE SELECTION FUNCTIONS
-        // =============================================================================
-
-        function validateNarratorVoice() {
-            const voiceId = document.getElementById('narratorVoiceId').value.trim();
-            if (!voiceId) {
-                addChatMessage('assistant', 'Please enter a narrator voice ID to validate.');
-                return;
-            }
-            addChatMessage('assistant', 'Validating narrator voice ID...');
-        }
-
-        function testNarratorVoice() {
-            addChatMessage('assistant', 'Testing narrator voice with sample text...');
-        }
-
-        function openNarratorSmartSelection() {
-            document.getElementById('narratorSmartSelectionModal').classList.add('show');
-            simulateNarratorSmartSelection();
-        }
-
-        function closeNarratorSmartSelection() {
-            document.getElementById('narratorSmartSelectionModal').classList.remove('show');
-            selectedNarratorVoiceFromModal = null;
-            document.getElementById('selectNarratorVoiceBtn').disabled = true;
-        }
-
-        function simulateNarratorSmartSelection() {
-            const candidatesEl = document.getElementById('narratorVoiceCandidates');
-            
-            setTimeout(() => {
-                candidatesEl.innerHTML = mockNarratorVoices.map((voice) => {
-                    return `
-                        <div class="voice-candidate" onclick="selectNarratorVoiceCandidate('${voice.voice_id}')" id="narrator-candidate-${voice.voice_id}">
-                            <div class="voice-info">
-                                <div class="voice-name">${voice.name}</div>
-                                <div class="voice-description">${voice.description}</div>
-                            </div>
-                            <div class="voice-controls">
-                                <button class="preview-btn" onclick="previewNarratorVoice(event, '${voice.voice_id}')" id="narrator-preview-${voice.voice_id}">
-                                    <span id="narrator-preview-icon-${voice.voice_id}">▶️</span>
-                                    <span id="narrator-preview-text-${voice.voice_id}">Preview</span>
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-            }, 2000);
-        }
-
-        function selectNarratorVoiceCandidate(voiceId) {
-            document.querySelectorAll('.voice-candidate').forEach(el => {
-                el.classList.remove('selected');
-            });
-            
-            document.getElementById(`narrator-candidate-${voiceId}`).classList.add('selected');
-            selectedNarratorVoiceFromModal = mockNarratorVoices.find(v => v.voice_id === voiceId);
-            document.getElementById('selectNarratorVoiceBtn').disabled = false;
-        }
-
-        function previewNarratorVoice(event, voiceId) {
-            event.stopPropagation();
-            addChatMessage('assistant', 'Playing narrator voice preview...');
-        }
-
-        function selectNarratorVoice() {
-            if (!selectedNarratorVoiceFromModal) return;
-            
-            showSelectedNarratorVoiceState(selectedNarratorVoiceFromModal);
-            closeNarratorSmartSelection();
-            addChatMessage('assistant', `Selected ${selectedNarratorVoiceFromModal.name} as your narrator voice.`);
-        }
-
-        function showSelectedNarratorVoiceState(voice) {
-            document.getElementById('noNarratorVoiceState').style.display = 'none';
-            document.getElementById('selectedNarratorVoiceState').style.display = 'block';
-            document.getElementById('selectedNarratorVoiceName').textContent = voice.name;
-            document.getElementById('selectedNarratorVoiceId').textContent = voice.voice_id;
-            document.getElementById('selectedNarratorVoiceDescription').textContent = voice.description;
-        }
-
-        function playNarratorVoice() {
-            addChatMessage('assistant', 'Playing narrator voice sample...');
-        }
-
-        function changeNarratorVoice() {
-            document.getElementById('selectedNarratorVoiceState').style.display = 'none';
-            document.getElementById('noNarratorVoiceState').style.display = 'block';
-            document.getElementById('narratorVoiceId').value = '';
-            addChatMessage('assistant', 'Narrator voice cleared. You can select a new one.');
-        }
-
-        // =============================================================================
-        // STORYBOARD GENERATION FUNCTIONS
-        // =============================================================================
-
-        function generateStoryboard() {
-            const targetDuration = document.getElementById('targetDuration').value;
-            if (!targetDuration) {
-                addChatMessage('assistant', 'Please set a target duration before generating the story.');
-                return;
-            }
-
-            addChatMessage('assistant', 'Generating your story with voiceover and timing... This may take a moment.');
-
-            setTimeout(() => {
-                document.getElementById('storyboardPlaceholder').classList.add('hidden');
-                document.getElementById('storyboardResults').classList.remove('hidden');
-                document.getElementById('storyParameters').classList.add('show');
-                updateStoryParametersDisplay();
-                populateStoryboard();
-                addChatMessage('assistant', 'Story generated! Click segments to edit text. Use Enter to split, Delete to merge, and Ctrl+Z to undo changes.');
-                document.getElementById('continueBtn').disabled = false;
-            }, 3000);
-        }
-
-        function updateStoryParametersDisplay() {
-            document.getElementById('paramSetting').textContent = document.getElementById('setting').value || 'Not set';
-            document.getElementById('paramTheme').textContent = document.getElementById('theme').value || 'Not set';
-            document.getElementById('paramMood').textContent = document.getElementById('mood').value || 'Not set';
-            document.getElementById('paramDuration').textContent = (document.getElementById('targetDuration').value || '0') + ' minutes';
-            
-            const narratorVoiceName = document.getElementById('selectedNarratorVoiceName').textContent;
-            const isNarratorSelected = document.getElementById('selectedNarratorVoiceState').style.display !== 'none';
-            document.getElementById('paramNarrator').textContent = isNarratorSelected ? narratorVoiceName : 'Not configured';
-        }
-
-        function populateStoryboard() {
-            const content = document.getElementById('storyboardContent');
-            const totalDuration = document.getElementById('totalDuration');
-            const segmentCount = document.getElementById('segmentCount');
-            
-            let totalSeconds = 0;
-            sampleStoryboardData.forEach(item => {
-                const [minutes, seconds] = item.duration.split(':').map(Number);
-                totalSeconds += minutes * 60 + seconds;
-            });
-            
-            const totalMinutes = Math.floor(totalSeconds / 60);
-            const remainingSeconds = totalSeconds % 60;
-            totalDuration.textContent = `${totalMinutes}:${remainingSeconds.toString().padStart(2, '0')}`;
-            segmentCount.textContent = sampleStoryboardData.length;
-            
-            content.innerHTML = '';
-            
-            sampleStoryboardData.forEach(segment => {
-                const segmentDiv = document.createElement('div');
-                segmentDiv.className = 'script-segment';
-                segmentDiv.setAttribute('data-segment-id', segment.id);
-                segmentDiv.innerHTML = `
-                    <div class="segment-header">
-                        <div class="segment-number">${segment.id}</div>
-                        <div class="segment-meta">
-                            <div class="character-tag">${segment.character}</div>
-                            <div class="duration-tag">${segment.duration}</div>
-                        </div>
-                    </div>
-                    <div class="segment-text" contenteditable="true" onkeydown="handleSegmentKeydown(event, ${segment.id})" onclick="selectSegment(${segment.id})">${segment.text}</div>
-                    <div class="segment-actions">
-                        <button class="play-segment-btn" onclick="playSegment(${segment.id})">
-                            <span id="play-icon-${segment.id}">▶️</span>
-                            Play
-                        </button>
-                    </div>
-                `;
-                content.appendChild(segmentDiv);
-            });
-        }
-
-        // =============================================================================
-        // SEGMENT INTERACTION FUNCTIONS
-        // =============================================================================
-
-        function selectSegment(segmentId) {
-            document.querySelectorAll('.script-segment').forEach(s => s.classList.remove('selected'));
-            document.querySelector(`[data-segment-id="${segmentId}"]`).classList.add('selected');
-            selectedSegment = segmentId;
-        }
-
-        function playSegment(segmentId) {
-            const playBtn = document.querySelector(`[data-segment-id="${segmentId}"] .play-segment-btn`);
-            const playIcon = document.getElementById(`play-icon-${segmentId}`);
-            
-            if (currentlyPlayingSegment && currentlyPlayingSegment !== segmentId) {
-                const currentBtn = document.querySelector(`[data-segment-id="${currentlyPlayingSegment}"] .play-segment-btn`);
-                const currentIcon = document.getElementById(`play-icon-${currentlyPlayingSegment}`);
-                currentBtn.classList.remove('playing');
-                currentIcon.textContent = '▶️';
-            }
-            
-            if (currentlyPlayingSegment === segmentId) {
-                playBtn.classList.remove('playing');
-                playIcon.textContent = '▶️';
-                currentlyPlayingSegment = null;
-                addChatMessage('assistant', 'Stopped audio playback.');
-            } else {
-                playBtn.classList.add('playing');
-                playIcon.textContent = '⏸️';
-                currentlyPlayingSegment = segmentId;
-                
-                const segment = sampleStoryboardData.find(s => s.id === segmentId);
-                addChatMessage('assistant', `Playing segment ${segmentId}: "${segment.text.substring(0, 50)}..."`);
-                
-                const [minutes, seconds] = segment.duration.split(':').map(Number);
-                const totalMs = (minutes * 60 + seconds) * 1000;
-                
-                setTimeout(() => {
-                    if (currentlyPlayingSegment === segmentId) {
-                        playBtn.classList.remove('playing');
-                        playIcon.textContent = '▶️';
-                        currentlyPlayingSegment = null;
-                    }
-                }, totalMs);
-            }
-        }
-
-        function handleSegmentKeydown(event, segmentId) {
-            if (event.key === 'Enter' && !event.shiftKey) {
-                event.preventDefault();
-                splitSegment(segmentId);
-            } else if (event.key === 'Delete' || event.key === 'Backspace') {
-                if (event.target.textContent.trim() === '') {
-                    event.preventDefault();
-                    mergeWithPreviousSegment(segmentId);
-                }
-            } else if (event.ctrlKey && event.key === 'z') {
-                event.preventDefault();
-                undoLastAction();
-            }
-        }
-
-        function splitSegment(segmentId) {
-            addChatMessage('assistant', `Split segment ${segmentId} functionality would be implemented here.`);
-        }
-
-        function mergeWithPreviousSegment(segmentId) {
-            addChatMessage('assistant', `Merge segment ${segmentId} functionality would be implemented here.`);
-        }
-
-        function undoLastAction() {
-            addChatMessage('assistant', 'Undo functionality would restore previous state.');
-        }
-
-        // =============================================================================
-        // CHAT FUNCTIONS
-        // =============================================================================
-
-        function sendChatMessage() {
-            const input = document.getElementById('chatInput');
-            const message = input.value.trim();
-            
-            if (!message) return;
-            
-            addChatMessage('user', message);
-            input.value = '';
-            
-            setTimeout(() => {
-                processAIResponse(message);
-            }, 1000);
-        }
-
-        function addChatMessage(sender, text) {
-            const messagesContainer = document.getElementById('chatMessages');
-            
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `chat-message ${sender}`;
-            
-            const avatar = sender === 'user' ? '👤' : '🤖';
-            
-            messageDiv.innerHTML = `
-                <div class="chat-avatar">${avatar}</div>
-                <div class="chat-bubble">${text}</div>
-            `;
-            
-            messagesContainer.appendChild(messageDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        function processAIResponse(userMessage) {
-            let response = "I'll help you with your story creation!";
-            
-            if (userMessage.toLowerCase().includes('voice')) {
-                response = "For voice setup, use Smart Selection to find narrator voices that match your story's mood, or enter a voice ID manually. Each character can have their own voice for dialogue.";
-            } else if (userMessage.toLowerCase().includes('split') || userMessage.toLowerCase().includes('edit')) {
-                response = "To edit segments: Click to select, then use Enter to split at cursor position, Delete/Backspace on empty segments to merge, or Ctrl+Z to undo changes.";
-            } else if (userMessage.toLowerCase().includes('duration') || userMessage.toLowerCase().includes('time')) {
-                response = "Set your target duration in minutes and I'll estimate the word count. The system will automatically time each segment when generating voiceover.";
-            } else if (userMessage.toLowerCase().includes('character')) {
-                response = "You can add up to 5 characters from your saved character library. Only one can be the protagonist. Click the + button to add characters and assign their roles.";
-            } else if (userMessage.toLowerCase().includes('generate')) {
-                response = "To generate your story, configure the parameters (setting, theme, mood, duration), set up your narrator voice, then click Generate Story & Voiceover.";
-            } else if (userMessage.toLowerCase().includes('protagonist')) {
-                response = "Only one character can be the protagonist. When adding a new protagonist, the previous one will automatically become a supporting character.";
-            }
-            
-            addChatMessage('assistant', response);
-        }
-
-        // =============================================================================
-        // EVENT LISTENERS AND INITIALIZATION
-        // =============================================================================
-
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add Character button
-            const addCharacterBtn = document.getElementById('addCharacterBtn');
-            if (addCharacterBtn) {
-                addCharacterBtn.addEventListener('click', openCharacterSelectionModal);
-            }
-            
-            // Parameters header toggle - FIXED
-            const parametersHeader = document.getElementById('parametersHeader');
-            if (parametersHeader) {
-                parametersHeader.addEventListener('click', toggleParameters);
-            }
-            
-            // Character selection modal event listeners
-            const closeCharacterModal = document.getElementById('closeCharacterModal');
-            const cancelCharacterSelection = document.getElementById('cancelCharacterSelection');
-            const nextToConfig = document.getElementById('nextToConfig');
-            const backToCharacterSelection = document.getElementById('backToCharacterSelection');
-            const addConfiguredCharacter = document.getElementById('addConfiguredCharacter');
-            
-            if (closeCharacterModal) {
-                closeCharacterModal.addEventListener('click', closeCharacterSelectionModal);
-            }
-            if (cancelCharacterSelection) {
-                cancelCharacterSelection.addEventListener('click', closeCharacterSelectionModal);
-            }
-            if (nextToConfig) {
-                nextToConfig.addEventListener('click', showCharacterConfigStep);
-            }
-            if (backToCharacterSelection) {
-                backToCharacterSelection.addEventListener('click', backToCharacterSelection);
-            }
-            if (addConfiguredCharacter) {
-                addConfiguredCharacter.addEventListener('click', addConfiguredCharacterToScript);
-            }
-            
-            // Form inputs change events
-            const settingInput = document.getElementById('setting');
-            const themeInput = document.getElementById('theme');
-            const moodSelect = document.getElementById('mood');
-            const durationInput = document.getElementById('targetDuration');
-            
-            if (settingInput) settingInput.addEventListener('change', updateParametersSummary);
-            if (themeInput) themeInput.addEventListener('change', updateParametersSummary);
-            if (moodSelect) moodSelect.addEventListener('change', updateParametersSummary);
-            if (durationInput) durationInput.addEventListener('change', updateParametersSummary);
-            
-            // Auto-resize chat textarea
-            const chatInput = document.getElementById('chatInput');
-            if (chatInput) {
-                chatInput.addEventListener('input', function() {
-                    this.style.height = 'auto';
-                    this.style.height = Math.min(this.scrollHeight, 60) + 'px';
-                });
-
-                // Enter to send message
-                chatInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter' && !e.shiftKey) {
-                        e.preventDefault();
-                        sendChatMessage();
-                    }
-                });
-            }
-
-            // Initialize
-            updateParametersSummary();
-            updateFooterStatus();
-        });
-    </script>
+    </footer>
 </body>
 </html>

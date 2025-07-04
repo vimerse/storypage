@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vimerse Story - Generated Script State</title>
+    <title>Vimerse Story - Character Selection Modal</title>
     <style>
         /* Same base styles as before */
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -149,14 +149,13 @@
             display: none;
         }
         
-        /* Story Parameters - NOW VISIBLE */
+        /* Story Parameters */
         .story-params {
             background: #252545;
             border: 1px solid #3A3B5A;
             border-radius: 8px;
             padding: 12px;
             margin-top: 16px;
-            display: block;
         }
         
         .params-header {
@@ -181,158 +180,25 @@
             padding: 20px;
         }
         
-        /* SCRIPT RESULTS - Main feature of this state */
-        .storyboard-results {
+        .placeholder {
             background: #252545;
+            border: 2px dashed #3A3B5A;
             border-radius: 12px;
-            border: 1px solid #3A3B5A;
+            padding: 40px 20px;
+            text-align: center;
             margin-bottom: 24px;
-            overflow: hidden;
-        }
-        
-        .storyboard-header {
-            background: #1A1B3A;
-            padding: 16px 20px;
-            border-bottom: 1px solid #3A3B5A;
+            min-height: 300px;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
         }
         
-        .storyboard-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #E5E7EB;
-        }
+        .placeholder-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.6; }
+        .placeholder-text { font-size: 16px; color: #9CA3AF; margin-bottom: 8px; }
+        .placeholder-subtext { font-size: 13px; color: #6B7280; opacity: 0.8; }
         
-        .storyboard-stats {
-            display: flex;
-            gap: 16px;
-            font-size: 12px;
-            color: #6B7280;
-        }
-        
-        .storyboard-content {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        
-        .script-segment {
-            padding: 16px 20px;
-            border-bottom: 1px solid #3A3B5A;
-            transition: background-color 0.2s;
-            position: relative;
-        }
-        
-        .script-segment:hover {
-            background-color: #1A1B3A;
-        }
-        
-        .script-segment.selected {
-            background-color: #2A2B4A;
-            border-left: 4px solid #FF6B00;
-        }
-        
-        .script-segment:last-child {
-            border-bottom: none;
-        }
-        
-        .segment-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 8px;
-            gap: 12px;
-        }
-        
-        .segment-number {
-            background: #FF6B00;
-            color: white;
-            font-size: 10px;
-            font-weight: 600;
-            padding: 2px 6px;
-            border-radius: 4px;
-            min-width: 20px;
-            text-align: center;
-        }
-        
-        .segment-meta {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            margin-left: auto;
-        }
-        
-        .character-tag {
-            background: #3B82F6;
-            color: white;
-            font-size: 10px;
-            font-weight: 500;
-            padding: 2px 8px;
-            border-radius: 12px;
-        }
-        
-        .duration-tag {
-            background: #0F0F23;
-            color: #6B7280;
-            font-size: 10px;
-            font-weight: 500;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: monospace;
-        }
-        
-        .segment-text {
-            color: #E5E7EB;
-            font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 8px;
-            min-height: 20px;
-            outline: none;
-            border: 1px solid transparent;
-            border-radius: 4px;
-            padding: 4px;
-        }
-        
-        .segment-actions {
-            display: flex;
-            gap: 8px;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-        
-        .script-segment:hover .segment-actions {
-            opacity: 1;
-        }
-        
-        .play-segment-btn {
-            background: #FF6B00;
-            border: none;
-            color: white;
-            font-size: 11px;
-            padding: 4px 8px;
-            border-radius: 4px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        
-        .play-segment-btn.playing {
-            background: #F59E0B;
-            color: #000;
-        }
-        
-        /* Keyboard help */
-        .keyboard-help {
-            font-size: 11px;
-            color: #6B7280;
-            text-align: center;
-            margin-top: 8px;
-            opacity: 0.8;
-        }
-        
-        /* Parameters Section - COLLAPSED after generation */
+        /* Parameters Section */
         .params-section {
             border-bottom: 1px solid #3A3B5A;
             margin-bottom: 16px;
@@ -348,7 +214,6 @@
         
         .section-title { font-size: 16px; font-weight: 600; }
         .section-summary { font-size: 13px; color: #6B7280; }
-        
         .expand-arrow { 
             width: 24px; height: 24px;
             background: #252545;
@@ -509,6 +374,229 @@
             cursor: not-allowed;
         }
         
+        /* ===== CHARACTER MODAL ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background: #2A2B4A;
+            border-radius: 16px;
+            border: 1px solid #3A3B5A;
+            max-width: 600px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid #3A3B5A;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #FF6B00, #FF8533);
+            color: white;
+            border-radius: 16px 16px 0 0;
+        }
+        
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 24px;
+            padding: 4px;
+            border-radius: 4px;
+            transition: all 0.2s;
+            opacity: 0.8;
+        }
+        
+        .modal-close:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .modal-body {
+            padding: 24px;
+        }
+        
+        .modal-footer {
+            padding: 20px 24px;
+            border-top: 1px solid #3A3B5A;
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            background: #1A1B3A;
+            border-radius: 0 0 16px 16px;
+        }
+        
+        /* Character Grid */
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 16px;
+            min-height: 200px;
+        }
+        
+        .available-character {
+            background: #252545;
+            border: 2px solid #3A3B5A;
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            position: relative;
+        }
+        
+        .available-character:hover {
+            border-color: #FF6B00;
+            background: #2A2B4A;
+            transform: translateY(-2px);
+        }
+        
+        .available-character.selected {
+            border-color: #FF6B00;
+            box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.3);
+            background: #2A2B4A;
+        }
+        
+        .available-character.already-added {
+            opacity: 0.5;
+            cursor: not-allowed;
+            border-color: #6B7280;
+        }
+        
+        .available-character.already-added:hover {
+            transform: none;
+            border-color: #6B7280;
+            background: #252545;
+        }
+        
+        .available-character-thumbnail {
+            width: 64px;
+            height: 64px;
+            border-radius: 8px;
+            background: #1A1B3A;
+            border: 1px solid #3A3B5A;
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 20px;
+            color: #E5E7EB;
+        }
+        
+        .available-character-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #E5E7EB;
+            margin-bottom: 4px;
+        }
+        
+        .available-character-role {
+            font-size: 12px;
+            color: #9CA3AF;
+            margin-bottom: 8px;
+        }
+        
+        .character-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+        
+        .character-tag-small {
+            background: #3B82F6;
+            color: white;
+            font-size: 9px;
+            font-weight: 500;
+            padding: 2px 6px;
+            border-radius: 8px;
+        }
+        
+        .character-tag-small.protagonist {
+            background: #FF6B00;
+        }
+        
+        .character-tag-small.antagonist {
+            background: #EF4444;
+        }
+        
+        .character-tag-small.supporting {
+            background: #3B82F6;
+        }
+        
+        .already-added-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #10B981;
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 10px;
+        }
+        
+        /* Modal Buttons */
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid #3A3B5A;
+            color: #9CA3AF;
+        }
+        
+        .btn-secondary:hover {
+            background: #252545;
+        }
+        
+        .btn-primary {
+            background: #FF6B00;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #E55A00;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
         /* Responsive */
         @media (max-width: 1200px) {
             .main-grid { grid-template-columns: 1fr; gap: 20px; }
@@ -567,7 +655,7 @@
                     <div class="character-role">Security expert</div>
                 </div>
 
-                <!-- Story Parameters - NOW VISIBLE -->
+                <!-- Story Parameters -->
                 <div class="story-params">
                     <div class="params-header">📋 Story Settings</div>
                     <div class="param-item">
@@ -586,126 +674,24 @@
                         <span class="param-label">Duration: </span>
                         <span class="param-value">3 minutes</span>
                     </div>
-                    <div class="param-item">
-                        <span class="param-label">Narrator: </span>
-                        <span class="param-value">Professional Narrator</span>
-                    </div>
                 </div>
             </aside>
 
             <!-- Main Content -->
             <section class="main-content">
-                <!-- SCRIPT RESULTS - Main feature -->
-                <div class="storyboard-results">
-                    <div class="storyboard-header">
-                        <h3 class="storyboard-title">📋 Script Segments</h3>
-                        <div class="storyboard-stats">
-                            <span>Duration: <strong>2:34</strong></span>
-                            <span>Segments: <strong>5</strong></span>
-                        </div>
-                    </div>
-                    <div class="storyboard-content">
-                        <!-- Script Segment 1 -->
-                        <div class="script-segment selected">
-                            <div class="segment-header">
-                                <div class="segment-number">1</div>
-                                <div class="segment-meta">
-                                    <div class="character-tag">Narrator</div>
-                                    <div class="duration-tag">00:08</div>
-                                </div>
-                            </div>
-                            <div class="segment-text">Deep in the Amazon rainforest, Dr. Emma Sterling pushes through the dense undergrowth, her eyes fixed on the ancient stone structures ahead.</div>
-                            <div class="segment-actions">
-                                <button class="play-segment-btn playing">
-                                    <span>⏸️</span>
-                                    Playing
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Script Segment 2 -->
-                        <div class="script-segment">
-                            <div class="segment-header">
-                                <div class="segment-number">2</div>
-                                <div class="segment-meta">
-                                    <div class="character-tag">Narrator</div>
-                                    <div class="duration-tag">00:07</div>
-                                </div>
-                            </div>
-                            <div class="segment-text">The ruins seem to pulse with an otherworldly energy, covered in symbols that don't match any known civilization.</div>
-                            <div class="segment-actions">
-                                <button class="play-segment-btn">
-                                    <span>▶️</span>
-                                    Play
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Script Segment 3 -->
-                        <div class="script-segment">
-                            <div class="segment-header">
-                                <div class="segment-number">3</div>
-                                <div class="segment-meta">
-                                    <div class="character-tag">Marcus Wright</div>
-                                    <div class="duration-tag">00:04</div>
-                                </div>
-                            </div>
-                            <div class="segment-text">"Emma, we need to be careful. These readings are off the charts."</div>
-                            <div class="segment-actions">
-                                <button class="play-segment-btn">
-                                    <span>▶️</span>
-                                    Play
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Script Segment 4 -->
-                        <div class="script-segment">
-                            <div class="segment-header">
-                                <div class="segment-number">4</div>
-                                <div class="segment-meta">
-                                    <div class="character-tag">Narrator</div>
-                                    <div class="duration-tag">00:06</div>
-                                </div>
-                            </div>
-                            <div class="segment-text">Marcus Wright, her trusted security expert, scans the area with his advanced equipment, concern etched on his weathered face.</div>
-                            <div class="segment-actions">
-                                <button class="play-segment-btn">
-                                    <span>▶️</span>
-                                    Play
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Script Segment 5 -->
-                        <div class="script-segment">
-                            <div class="segment-header">
-                                <div class="segment-number">5</div>
-                                <div class="segment-meta">
-                                    <div class="character-tag">Narrator</div>
-                                    <div class="duration-tag">00:09</div>
-                                </div>
-                            </div>
-                            <div class="segment-text">As Emma approaches the central structure, a brilliant light emanates from within, revealing technology that shouldn't exist on Earth.</div>
-                            <div class="segment-actions">
-                                <button class="play-segment-btn">
-                                    <span>▶️</span>
-                                    Play
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="keyboard-help">
-                        ⌨️ Enter: Split | Delete/Backspace: Merge | Ctrl+Z: Undo | Click: Select & Edit
-                    </div>
+                <!-- Storyboard Placeholder -->
+                <div class="placeholder">
+                    <div class="placeholder-icon">🎬</div>
+                    <div class="placeholder-text">Storyboard Preview</div>
+                    <div class="placeholder-subtext">Generate script to see voiced segments with timing</div>
                 </div>
 
-                <!-- Parameters Section - COLLAPSED after generation -->
+                <!-- Parameters Section -->
                 <div class="params-section">
                     <div class="params-header-main">
                         <div>
                             <div class="section-title">Story Parameters</div>
-                            <div class="section-summary">Story generated successfully</div>
+                            <div class="section-summary">Click to configure script generation settings</div>
                         </div>
                         <div class="expand-arrow">▶</div>
                     </div>
@@ -727,22 +713,12 @@
                     </div>
                     <div class="chat-message user">
                         <div class="chat-avatar">👤</div>
-                        <div class="chat-bubble">Generate the story now</div>
+                        <div class="chat-bubble">I want to add more characters</div>
                     </div>
                     <div class="chat-message assistant">
                         <div class="chat-avatar">🤖</div>
                         <div class="chat-bubble">
-                            Story generated! 🎉 You now have 5 script segments totaling 2:34. Click any segment to edit the text, or use the play buttons to preview the voiceover. You can split segments with Enter or merge them with Delete.
-                        </div>
-                    </div>
-                    <div class="chat-message user">
-                        <div class="chat-avatar">👤</div>
-                        <div class="chat-bubble">How do I edit a segment?</div>
-                    </div>
-                    <div class="chat-message assistant">
-                        <div class="chat-avatar">🤖</div>
-                        <div class="chat-bubble">
-                            Click on any segment text to edit it directly. The segment will highlight in orange when selected. You can also use keyboard shortcuts: Enter to split at cursor position, Delete/Backspace to merge segments.
+                            Great! Click the "+" button next to "Script Characters" to add more characters from your library. You can have up to 5 characters total, with only 1 protagonist.
                         </div>
                     </div>
                 </div>
@@ -756,11 +732,93 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-status">Story generated: 5 segments, 2:34 duration</div>
+        <div class="footer-status">Selected: Emma Sterling (protagonist), Marcus Wright</div>
         <div class="footer-buttons">
             <button class="footer-btn secondary">← Back</button>
-            <button class="footer-btn primary">Next →</button>
+            <button class="footer-btn primary" disabled>Next →</button>
         </div>
     </footer>
+
+    <!-- CHARACTER SELECTION MODAL -->
+    <div class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">➕ Add Character to Script</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <p style="margin-bottom: 16px; color: #9CA3AF;">Choose a character to add to your script (max 5 characters, only 1 protagonist allowed):</p>
+                
+                <div class="character-grid">
+                    <!-- Available Character 1 -->
+                    <div class="available-character selected">
+                        <div class="available-character-thumbnail">L</div>
+                        <div class="available-character-name">Luna Shadowheart</div>
+                        <div class="available-character-role">Mysterious guide</div>
+                        <div class="character-tags">
+                            <span class="character-tag-small supporting">SUPPORTING</span>
+                        </div>
+                    </div>
+
+                    <!-- Available Character 2 -->
+                    <div class="available-character">
+                        <div class="available-character-thumbnail">Z</div>
+                        <div class="available-character-name">Dr. Zara Chen</div>
+                        <div class="available-character-role">Xenobiologist</div>
+                        <div class="character-tags">
+                            <span class="character-tag-small supporting">SUPPORTING</span>
+                        </div>
+                    </div>
+
+                    <!-- Available Character 3 -->
+                    <div class="available-character">
+                        <div class="available-character-thumbnail">V</div>
+                        <div class="available-character-name">Captain Vex</div>
+                        <div class="available-character-role">Alien commander</div>
+                        <div class="character-tags">
+                            <span class="character-tag-small antagonist">ANTAGONIST</span>
+                        </div>
+                    </div>
+
+                    <!-- Available Character 4 -->
+                    <div class="available-character">
+                        <div class="available-character-thumbnail">A</div>
+                        <div class="available-character-name">Alex Rivers</div>
+                        <div class="available-character-role">Tech specialist</div>
+                        <div class="character-tags">
+                            <span class="character-tag-small supporting">SUPPORTING</span>
+                        </div>
+                    </div>
+
+                    <!-- Available Character 5 - Already Added -->
+                    <div class="available-character already-added">
+                        <div class="already-added-badge">Added</div>
+                        <div class="available-character-thumbnail">M</div>
+                        <div class="available-character-name">Marcus Wright</div>
+                        <div class="available-character-role">Security expert</div>
+                        <div class="character-tags">
+                            <span class="character-tag-small supporting">SUPPORTING</span>
+                        </div>
+                    </div>
+
+                    <!-- Available Character 6 -->
+                    <div class="available-character">
+                        <div class="available-character-thumbnail">N</div>
+                        <div class="available-character-name">Nova</div>
+                        <div class="available-character-role">AI consciousness</div>
+                        <div class="character-tags">
+                            <span class="character-tag-small supporting">SUPPORTING</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary">Cancel</button>
+                <button class="btn btn-primary">Next →</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

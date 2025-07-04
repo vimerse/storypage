@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vimerse Story - Hover States</title>
+    <title>Vimerse Story - Expanded Parameters</title>
     <style>
         /* Same base styles as before */
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -96,11 +96,10 @@
             align-items: center;
         }
         
-        /* HOVER STATE: Add button is hovered */
         .add-btn {
-            background: rgba(255, 107, 0, 0.1);
+            background: none;
             border: none;
-            color: #E55A00;
+            color: #FF6B00;
             font-size: 14px;
             cursor: pointer;
             width: 20px; height: 20px;
@@ -108,7 +107,6 @@
             align-items: center;
             justify-content: center;
             border-radius: 4px;
-            transform: scale(1.1);
         }
         
         .character-card {
@@ -119,11 +117,6 @@
             padding: 12px;
             text-align: center;
             position: relative;
-        }
-        
-        /* HOVER STATE: Character card hovered */
-        .character-card.hovered {
-            border-color: #FF6B00;
         }
         
         .character-avatar {
@@ -143,7 +136,6 @@
         .character-role { font-size: 10px; color: #6B7280; }
         .protagonist-badge { font-size: 9px; color: #FF6B00; font-weight: 600; margin-top: 2px; }
         
-        /* HOVER STATE: Remove button visible on hover */
         .remove-btn {
             position: absolute;
             top: 4px; right: 4px;
@@ -154,9 +146,7 @@
             width: 16px; height: 16px;
             font-size: 10px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: none;
         }
         
         /* Story Parameters */
@@ -208,34 +198,41 @@
         .placeholder-text { font-size: 16px; color: #9CA3AF; margin-bottom: 8px; }
         .placeholder-subtext { font-size: 13px; color: #6B7280; opacity: 0.8; }
         
-        /* Parameters Section */
+        /* Parameters Section - EXPANDED STATE */
         .params-section {
             border-bottom: 1px solid #3A3B5A;
             margin-bottom: 16px;
             padding-bottom: 12px;
         }
         
-        /* HOVER STATE: Parameters header hovered */
         .params-header-main {
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            color: #FF6B00;
         }
         
         .section-title { font-size: 16px; font-weight: 600; }
         .section-summary { font-size: 13px; color: #6B7280; }
         
-        /* HOVER STATE: Expand arrow hovered */
+        /* EXPANDED STATE: Arrow rotated */
         .expand-arrow { 
             width: 24px; height: 24px;
-            background: rgba(255, 107, 0, 0.1);
+            background: #252545;
             border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #FF6B00;
+            color: #9CA3AF;
+            transform: rotate(90deg);
+        }
+        
+        /* EXPANDED STATE: Form is visible with animation */
+        .parameters-content {
+            max-height: 1000px;
+            opacity: 1;
+            margin-bottom: 16px;
+            overflow: visible;
         }
         
         .form-grid {
@@ -255,15 +252,13 @@
             margin-bottom: 6px;
         }
         
-        /* HOVER/FOCUS STATE: Form inputs focused */
         .form-input, .form-textarea, .form-select {
             padding: 8px 12px;
-            border: 1px solid #FF6B00;
+            border: 1px solid #3A3B5A;
             border-radius: 6px;
             font-size: 13px;
-            background: #1A1B3A;
+            background: #252545;
             color: #E5E7EB;
-            box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.2);
         }
         
         .form-textarea { min-height: 60px; font-family: inherit; }
@@ -287,7 +282,6 @@
         
         .voice-title { font-size: 14px; font-weight: 600; }
         
-        /* HOVER STATE: Smart selection button hovered */
         .smart-btn {
             background: linear-gradient(135deg, #FF6B00, #FF8533);
             color: white;
@@ -297,27 +291,23 @@
             font-size: 11px;
             font-weight: 500;
             cursor: pointer;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(255, 107, 0, 0.4);
         }
         
         .voice-input-group { display: flex; gap: 10px; }
         .voice-input { flex: 1; }
         .voice-actions { display: flex; gap: 8px; }
         
-        /* HOVER STATE: Action buttons hovered */
         .action-btn {
             padding: 6px 12px;
-            background: #FF6B00;
+            background: transparent;
             border: 1px solid #FF6B00;
             border-radius: 4px;
-            color: white;
+            color: #FF6B00;
             font-size: 11px;
             font-weight: 500;
             cursor: pointer;
         }
         
-        /* HOVER STATE: Generate button hovered */
         .generate-btn {
             width: 100%;
             padding: 12px 20px;
@@ -328,8 +318,6 @@
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(255, 107, 0, 0.4);
         }
         
         /* Chat Section */
@@ -417,20 +405,17 @@
             align-items: flex-end;
         }
         
-        /* FOCUS STATE: Chat input focused */
         .chat-input {
             flex: 1;
             background: #252545;
-            border: 1px solid #FF6B00;
+            border: 1px solid #3A3B5A;
             border-radius: 16px;
             padding: 6px 12px;
             font-size: 12px;
             color: #E5E7EB;
             min-height: 28px;
-            box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.2);
         }
         
-        /* HOVER STATE: Send button hovered */
         .chat-send {
             width: 28px; height: 28px;
             background: linear-gradient(135deg, #FF6B00, #FF8533);
@@ -441,8 +426,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(255, 107, 0, 0.4);
         }
         
         /* Footer */
@@ -471,16 +454,14 @@
             border: none;
         }
         
-        /* HOVER STATE: Secondary button hovered */
         .footer-btn.secondary {
-            background: #252545;
+            background: transparent;
             border: 1px solid #3A3B5A;
             color: #9CA3AF;
         }
         
-        /* HOVER STATE: Primary button hovered */
         .footer-btn.primary {
-            background: #E55A00;
+            background: #FF6B00;
             color: white;
         }
         
@@ -534,8 +515,7 @@
                 </div>
                 
                 <!-- Character Cards -->
-                <div class="character-card hovered">
-                    <button class="remove-btn">×</button>
+                <div class="character-card">
                     <div class="character-avatar">E</div>
                     <div class="character-name">Emma Sterling</div>
                     <div class="character-role">Lead archaeologist</div>
@@ -543,7 +523,6 @@
                 </div>
 
                 <div class="character-card">
-                    <button class="remove-btn" style="display: none;">×</button>
                     <div class="character-avatar">M</div>
                     <div class="character-name">Marcus Wright</div>
                     <div class="character-role">Security expert</div>
@@ -580,18 +559,18 @@
                     <div class="placeholder-subtext">Generate script to see voiced segments with timing</div>
                 </div>
 
-                <!-- Parameters Section -->
+                <!-- Parameters Section - EXPANDED STATE -->
                 <div class="params-section">
                     <div class="params-header-main">
                         <div>
                             <div class="section-title">Story Parameters</div>
-                            <div class="section-summary">Click to configure script generation settings</div>
+                            <div class="section-summary">Configure script generation settings</div>
                         </div>
                         <div class="expand-arrow">▶</div>
                     </div>
 
-                    <!-- Form (showing hover/focus states) -->
-                    <div>
+                    <!-- Form (EXPANDED - visible) -->
+                    <div class="parameters-content">
                         <div class="form-grid">
                             <div class="form-group">
                                 <label class="form-label">Setting/Location</label>

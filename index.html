@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Storyboard Interface - Row Selected State</title>
+    <title>Storyboard Interface - Camera View</title>
     <style>
         /* Design System Foundation */
         :root {
@@ -193,56 +193,6 @@
         
         .menu-item:not(:last-child) {
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        /* Floating Action Bar */
-        .floating-actions {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 16px 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            z-index: 100;
-        }
-        
-        .floating-actions.show { display: flex; }
-        
-        .floating-text {
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
-        
-        .floating-btn {
-            background: var(--success);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .floating-btn:hover {
-            background: #059669;
-            transform: translateY(-1px);
-        }
-        
-        .floating-btn.secondary {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text-secondary);
-        }
-        
-        .floating-btn.secondary:hover {
-            background: var(--bg-tertiary);
         }
         
         /* Scene Cards */
@@ -574,8 +524,8 @@
                     </div>
                     
                     <div class="view-toggle">
-                        <button class="toggle-btn active" title="Duration">⏱️</button>
-                        <button class="toggle-btn" title="Camera">📹</button>
+                        <button class="toggle-btn" title="Duration">⏱️</button>
+                        <button class="toggle-btn active" title="Camera">📹</button>
                         <button class="toggle-btn" title="Notes">📝</button>
                     </div>
                 </div>
@@ -592,19 +542,10 @@
             </div>
         </div>
         
-        <!-- Floating Action Bar -->
-        <div class="floating-actions show">
-            <div class="floating-text">
-                <span>2</span> scenes selected
-            </div>
-            <button class="floating-btn">Approve 1, Unapprove 1</button>
-            <button class="floating-btn secondary">Clear</button>
-        </div>
-        
         <!-- Scenes -->
         <div class="scenes-container">
-            <!-- Scene 1 - Approved - SELECTED -->
-            <div class="scene-card approved selected" data-approved="true">
+            <!-- Scene 1 - Approved -->
+            <div class="scene-card approved" data-approved="true">
                 <div class="scene-content">
                     <div class="scene-left">
                         <div class="row-number">1</div>
@@ -621,11 +562,11 @@
                         Welcome to our journey through the ancient forests of the Pacific Northwest. Here, towering trees have stood for centuries, witnessing the passage of time and the changing seasons.
                     </div>
                     <div class="scene-meta">
-                        <div class="meta-row meta-duration" data-type="duration">
+                        <div class="meta-row meta-duration hide" data-type="duration">
                             <span class="icon">⏱️</span>
                             <span>00:08</span>
                         </div>
-                        <div class="meta-row meta-camera hide" data-type="camera">
+                        <div class="meta-row meta-camera" data-type="camera">
                             <span class="icon">📹</span>
                             <input type="text" class="editable-input" value="Wide Shot - Forest Entrance" />
                         </div>
@@ -637,8 +578,8 @@
                 </div>
             </div>
             
-            <!-- Scene 2 - Under Review - SELECTED -->
-            <div class="scene-card selected" data-approved="false">
+            <!-- Scene 2 - Under Review -->
+            <div class="scene-card" data-approved="false">
                 <div class="scene-content">
                     <div class="scene-left">
                         <div class="row-number">2</div>
@@ -655,11 +596,11 @@
                         These Douglas firs can grow up to 300 feet tall and live for over 1,000 years. Their massive trunks tell stories of resilience and survival through countless storms and seasons.
                     </div>
                     <div class="scene-meta">
-                        <div class="meta-row meta-duration" data-type="duration">
+                        <div class="meta-row meta-duration hide" data-type="duration">
                             <span class="icon">⏱️</span>
                             <span>00:12</span>
                         </div>
-                        <div class="meta-row meta-camera hide" data-type="camera">
+                        <div class="meta-row meta-camera" data-type="camera">
                             <span class="icon">📹</span>
                             <input type="text" class="editable-input" value="Close-up - Tree Bark Detail" />
                         </div>
@@ -684,11 +625,11 @@
                         <strong>ACTION:</strong> The camera slowly pans across the forest canopy as morning mist rises between the trees. Sunbeams pierce through the fog, creating dramatic shafts of light. A gentle breeze causes the leaves to rustle softly.
                     </div>
                     <div class="scene-meta">
-                        <div class="meta-row meta-duration" data-type="duration">
+                        <div class="meta-row meta-duration hide" data-type="duration">
                             <span class="icon">⏱️</span>
                             <span>00:06</span>
                         </div>
-                        <div class="meta-row meta-camera hide" data-type="camera">
+                        <div class="meta-row meta-camera" data-type="camera">
                             <span class="icon">📹</span>
                             <input type="text" class="editable-input" value="Slow Pan - Canopy Level" />
                         </div>
@@ -718,11 +659,11 @@
                         As we walk deeper into the forest, notice how the light filters through the canopy above, creating a natural cathedral of green and gold.
                     </div>
                     <div class="scene-meta">
-                        <div class="meta-row meta-duration" data-type="duration">
+                        <div class="meta-row meta-duration hide" data-type="duration">
                             <span class="icon">⏱️</span>
                             <span>00:10</span>
                         </div>
-                        <div class="meta-row meta-camera hide" data-type="camera">
+                        <div class="meta-row meta-camera" data-type="camera">
                             <span class="icon">📹</span>
                             <input type="text" class="editable-input" value="POV Walking Shot" />
                         </div>
